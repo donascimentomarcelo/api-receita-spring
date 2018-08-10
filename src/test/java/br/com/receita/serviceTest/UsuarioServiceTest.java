@@ -1,6 +1,9 @@
 package br.com.receita.serviceTest;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.UsuarioRepository;
 import br.com.receita.service.UsuarioService;
+import br.com.receita.service.exception.UnicidadeEmailException;
 import br.com.receita.service.impl.UsuarioServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -35,6 +39,8 @@ public class UsuarioServiceTest {
 		usuario.setNome(NOME);
 		usuario.setEmail(EMAIL);
 		usuario.setSenha(SENHA);
+		
+		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
 	}
 	
 	@Test
@@ -42,5 +48,12 @@ public class UsuarioServiceTest {
 		usuarioService.salvar(usuario);
 		
 		verify(usuarioRepository).save(usuario);
+	}
+	
+	@Test(expected = UnicidadeEmailException.class)
+	public void naoSalvarDoisUsuariosComMesmoEmail() throws Exception {
+		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.of(usuario));
+		
+		usuarioRepository.save(usuario);
 	}
 }
