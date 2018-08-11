@@ -39,7 +39,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public List<Usuario> ListarTodos() {
+	public List<Usuario> listarTodos() {
 		List<Usuario> list = usuarioRepository.findAll();
 		return list;
 	}
