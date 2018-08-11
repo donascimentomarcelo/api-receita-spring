@@ -1,5 +1,6 @@
 package br.com.receita.serviceTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -56,4 +57,16 @@ public class UsuarioServiceTest {
 		
 		usuarioRepository.save(usuario);
 	}
+	
+	@Test
+	public void verificarSeEmailJaEstaCadastrado() throws Exception {
+		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.of(usuario));
+		
+		Optional<Usuario> optional = usuarioRepository.findByEmail(EMAIL);
+		
+		assertThat(optional.isPresent()).isTrue();
+		
+		Usuario usr = optional.get();
+		assertThat(usr.getNome()).isEqualTo(NOME);
+	}	
 }
