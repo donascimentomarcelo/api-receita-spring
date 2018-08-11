@@ -27,7 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 			throw new UnicidadeEmailException();
 		}
 		
-		return usuarioRepository.save(usuario);
+		usuario = usuarioRepository.save(usuario);
+		
+		return usuario; 
 
 	}
 
@@ -42,6 +44,12 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<Usuario> listarTodos() {
 		List<Usuario> list = usuarioRepository.findAll();
 		return list;
+	}
+
+	@Override
+	public Usuario pesquisarPorId(Integer id) {
+		Usuario usuario = usuarioRepository.findOne(id);
+		return usuario;
 	}
 
 
