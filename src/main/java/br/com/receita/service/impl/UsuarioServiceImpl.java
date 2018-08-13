@@ -21,10 +21,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Usuario salvar(Usuario usuario) throws UnicidadeEmailException {
-		Optional<Usuario> optional = usuarioRepository.findByEmail(usuario.getEmail());
-		
-		if (optional.isPresent()) {
-			throw new UnicidadeEmailException();
+
+		if (usuario.getId() == null) {
+			verificarSeEmailExiste(usuario.getEmail());
 		}
 		
 		usuario = usuarioRepository.save(usuario);
@@ -50,6 +49,15 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario pesquisarPorId(Integer id) {
 		Usuario usuario = usuarioRepository.findOne(id);
 		return usuario;
+	}
+
+	@Override
+	public void verificarSeEmailExiste(String email) throws UnicidadeEmailException {
+		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
+		
+		if (optional.isPresent()) {
+			throw new UnicidadeEmailException();
+		}
 	}
 
 

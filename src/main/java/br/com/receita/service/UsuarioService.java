@@ -14,5 +14,7 @@ public interface UsuarioService {
 	List<Usuario> listarTodos();
 
 	Usuario pesquisarPorId(Integer id);
+	
+	void verificarSeEmailExiste(String email) throws UnicidadeEmailException;
 
 }
