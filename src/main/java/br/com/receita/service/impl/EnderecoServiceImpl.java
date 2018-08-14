@@ -26,5 +26,17 @@ public class EnderecoServiceImpl implements EnderecoService{
 		
 		return enderecoRepository.save(endereco);
 	}
+
+	@Override
+	public Endereco pesquisarEndereco(Integer id) {
+		Endereco endereco = enderecoRepository.findOne(id);
+		return endereco;
+	}
+
+	@Override
+	public Endereco salvar(Endereco endereco) {
+		endereco = enderecoRepository.save(endereco);
+		return endereco;
+	}
 	
 }
