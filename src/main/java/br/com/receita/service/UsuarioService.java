@@ -17,4 +17,6 @@ public interface UsuarioService {
 	
 	void verificarSeEmailExiste(String email) throws UnicidadeEmailException;
 
+	List<Usuario> pesquisaDinamica(Usuario usuario);
+
 }

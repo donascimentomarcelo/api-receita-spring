@@ -57,4 +57,11 @@ public class UsuarioResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	
+	@PostMapping("/pesquisa-dinamica")
+	public ResponseEntity<List<Usuario>> pesquisaDinamica(@RequestBody Usuario usuario) {
+		List<Usuario> list = usuarioService.pesquisaDinamica(usuario);
+		
+		return ResponseEntity.ok().body(list);
+	}
 }	
