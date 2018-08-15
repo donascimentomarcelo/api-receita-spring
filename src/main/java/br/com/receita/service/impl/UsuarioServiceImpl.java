@@ -3,6 +3,11 @@ package br.com.receita.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.receita.domain.Usuario;
@@ -13,7 +18,11 @@ import br.com.receita.service.exception.UnicidadeEmailException;
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
+	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
@@ -21,13 +30,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Usuario salvar(Usuario usuario) throws UnicidadeEmailException {
-		Optional<Usuario> optional = usuarioRepository.findByEmail(usuario.getEmail());
-		
-		if (optional.isPresent()) {
-			throw new UnicidadeEmailException();
+
+		if (usuario.getId() == null) {
+			verificarSeEmailExiste(usuario.getEmail());
 		}
 		
-		return usuarioRepository.save(usuario);
+		usuario = usuarioRepository.save(usuario);
+		
+		return usuario; 
 
 	}
 
@@ -42,6 +52,48 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<Usuario> listarTodos() {
 		List<Usuario> list = usuarioRepository.findAll();
 		return list;
+	}
+
+	@Override
+	public Usuario pesquisarPorId(Integer id) {
+		Usuario usuario = usuarioRepository.findOne(id);
+		return usuario;
+	}
+
+	@Override
+	public void verificarSeEmailExiste(String email) throws UnicidadeEmailException {
+		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
+		
+		if (optional.isPresent()) {
+			throw new UnicidadeEmailException();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Usuario> pesquisaDinamica(Usuario usuario) {
+		StringBuilder builder = new StringBuilder("SELECT bean from Usuario bean where id is not null");
+		
+		
+		if (usuario.getNome() != null) {
+			builder.append(" and bean.nome = :nome");
+		}
+		
+		if (usuario.getEmail() != null) {
+			builder.append(" and bean.email = :email");
+		}
+		
+		Query query = entityManager.createQuery(builder.toString());
+		
+		if (usuario.getNome() != null) {
+			query.setParameter("nome", usuario.getNome());
+		}
+		
+		if (usuario.getEmail() != null) {
+			query.setParameter("email", usuario.getEmail());
+		}
+		
+		return query.getResultList();
 	}
 
 

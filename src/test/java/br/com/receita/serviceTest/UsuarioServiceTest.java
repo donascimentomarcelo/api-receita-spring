@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.UsuarioRepository;
 import br.com.receita.service.UsuarioService;
-import br.com.receita.service.exception.UnicidadeEmailException;
 import br.com.receita.service.impl.UsuarioServiceImpl;
 
 @RunWith(SpringRunner.class)
