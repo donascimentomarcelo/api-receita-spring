@@ -7,24 +7,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.receita.domain.enums.Medida;
+
 @Entity
 public class Engrediente implements Serializable{
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 	private String descricao;
+	private Integer medida;
 	
-	public Engrediente(String id, String descricao) {
+	public Engrediente() {
+		super();
+	}
+	
+	public Engrediente(String id, String descricao, Medida medida) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-	}
-		
-	public Engrediente() {
-		super();
+		this.medida = medida.getCodigo();
 	}
 
 	public String getId() {
@@ -39,7 +42,13 @@ public class Engrediente implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+	public Medida getMedida() {
+		return Medida.toEnum(medida);
+	}
+	public void setMedida(Medida medida) {
+		this.medida = medida.getCodigo();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

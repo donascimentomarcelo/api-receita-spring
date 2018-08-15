@@ -5,8 +5,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.receita.domain.Endereco;
+import br.com.receita.domain.Engrediente;
 import br.com.receita.domain.Usuario;
+import br.com.receita.domain.enums.Medida;
 import br.com.receita.repository.EnderecoRepository;
+import br.com.receita.repository.EngredienteRepository;
 import br.com.receita.repository.UsuarioRepository;
 
 @Configuration
@@ -17,6 +20,9 @@ public class Instanciacao implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private EngredienteRepository engredienteRepository;
 	
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -30,6 +36,10 @@ public class Instanciacao implements CommandLineRunner{
 		endereco.setUsuario(usuario);
 		
 		enderecoRepository.save(endereco);
+		
+		Engrediente engrediente = new Engrediente(null, "Agrião", Medida.GRAMAS);
+		
+		engredienteRepository.save(engrediente);
 	}
 
 	
