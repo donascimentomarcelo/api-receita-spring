@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -30,6 +32,8 @@ public class UsuarioServiceTest {
 	private UsuarioService usuarioService;
 	
 	private Usuario usuario;
+	
+	private List<Usuario> listaUsuarios;
 		
 	@Before
 	public void setUp() throws Exception {
@@ -40,7 +44,10 @@ public class UsuarioServiceTest {
 		usuario.setEmail(EMAIL);
 		usuario.setSenha(SENHA);
 		
+		listaUsuarios = new ArrayList<Usuario>();
+		
 		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
+		when(usuarioService.pesquisaDinamica(usuario)).thenReturn(listaUsuarios);
 	}
 	
 	@Test
@@ -67,6 +74,15 @@ public class UsuarioServiceTest {
 		
 		Usuario usr = optional.get();
 		assertThat(usr.getNome()).isEqualTo(NOME);
+	}
+	
+	@Test
+	public void pesquisaDinamicaDeUsuario() throws Exception {
+		when(usuarioService.pesquisaDinamica(usuario)).thenReturn(listaUsuarios);
+		
+		List<Usuario> list = usuarioService.pesquisaDinamica(usuario);
+		
+		assertThat(list.size()).isEqualTo(1);
 	}
 	
 }
