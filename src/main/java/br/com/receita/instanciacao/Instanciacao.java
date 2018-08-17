@@ -37,7 +37,7 @@ public class Instanciacao implements CommandLineRunner{
 		
 		enderecoRepository.save(endereco);
 		
-		Engrediente engrediente = new Engrediente(null, "Agrião", Medida.GRAMAS);
+		Engrediente engrediente =  new Engrediente(null, "Alho", 2, Medida.GRAMAS);
 		
 		engredienteRepository.save(engrediente);
 	}

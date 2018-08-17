@@ -15,36 +15,51 @@ public class Engrediente implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Integer id;
 	private String descricao;
+	private Integer quantidade;
 	private Integer medida;
 	
 	public Engrediente() {
 		super();
 	}
-	
-	public Engrediente(String id, String descricao, Medida medida) {
+
+	public Engrediente(Integer id, String descricao, Integer quantidade, Medida medida) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.medida = medida.getCodigo();
+		this.quantidade = quantidade;
+		this.medida = (medida==null) ? null : medida.getCodigo();
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+	
 	public Medida getMedida() {
 		return Medida.toEnum(medida);
 	}
+
 	public void setMedida(Medida medida) {
 		this.medida = medida.getCodigo();
 	}
@@ -56,6 +71,7 @@ public class Engrediente implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
