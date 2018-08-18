@@ -31,9 +31,12 @@ public class UsuarioServiceTest {
 	
 	private UsuarioService usuarioService;
 	
-	private Usuario usuario;
+	@MockBean
+	private UsuarioServiceImpl usuarioServiceImpl;
 	
+	private Usuario usuario;
 	private List<Usuario> listaUsuarios;
+	
 		
 	@Before
 	public void setUp() throws Exception {
@@ -45,9 +48,11 @@ public class UsuarioServiceTest {
 		usuario.setSenha(SENHA);
 		
 		listaUsuarios = new ArrayList<Usuario>();
+		listaUsuarios.add(0, usuario);
 		
 		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
-		when(usuarioService.pesquisaDinamica(usuario)).thenReturn(listaUsuarios);
+		when(usuarioServiceImpl.findByEmail(EMAIL)).thenReturn(usuario);
+		when(usuarioServiceImpl.pesquisaDinamica(usuario)).thenReturn(listaUsuarios);
 	}
 	
 	@Test
@@ -66,23 +71,23 @@ public class UsuarioServiceTest {
 	
 	@Test
 	public void verificarSeEmailJaEstaCadastrado() throws Exception {
-		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.of(usuario));
+		when(usuarioServiceImpl.findByEmail(EMAIL)).thenReturn(usuario);
 		
-		Optional<Usuario> optional = usuarioRepository.findByEmail(EMAIL);
+		Usuario usr = usuarioServiceImpl.findByEmail(EMAIL);
 		
-		assertThat(optional.isPresent()).isTrue();
-		
-		Usuario usr = optional.get();
 		assertThat(usr.getNome()).isEqualTo(NOME);
 	}
 	
 	@Test
-	public void pesquisaDinamicaDeUsuario() throws Exception {
-		when(usuarioService.pesquisaDinamica(usuario)).thenReturn(listaUsuarios);
-		
-		List<Usuario> list = usuarioService.pesquisaDinamica(usuario);
-		
-		assertThat(list.size()).isEqualTo(1);
+	public void pesquisaDinamica() throws Exception {
+		Usuario usr = new Usuario();
+		usr.setNome(NOME);
+		usr.setEmail(EMAIL);
+		when(usuarioServiceImpl.pesquisaDinamica(usr)).thenReturn(listaUsuarios);
+
+		List<Usuario> list = usuarioServiceImpl.pesquisaDinamica(usr);
+		assertThat(list.get(0).getNome()).isEqualTo(NOME);
 	}
+	
 	
 }
