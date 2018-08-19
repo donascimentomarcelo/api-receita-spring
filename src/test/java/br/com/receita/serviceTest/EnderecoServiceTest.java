@@ -28,10 +28,6 @@ public class EnderecoServiceTest {
 	private static final String LOGRADOURO = null;
 	private static final String UF = "RJ";
 	
-	private static final String NOME = "Crane";
-	private static final String EMAIL = "crane@gmail.com";
-	private static final String SENHA = "123";
-	
 	@MockBean
 	private EnderecoRepository enderecoRepository;
 	private EnderecoService enderecoService;
@@ -49,10 +45,6 @@ public class EnderecoServiceTest {
 		enderecoService = new EnderecoServiceImpl(enderecoRepository);
 		
 		usuario = new Usuario();
-		usuario.setId(1);
-		usuario.setNome(NOME);
-		usuario.setEmail(EMAIL);
-		usuario.setSenha(SENHA);
 		
 		endereco = new Endereco();
 		endereco.setBairro(BAIRRO);
