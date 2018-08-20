@@ -48,7 +48,7 @@ public class Instanciacao implements CommandLineRunner{
 		
 		Engrediente engrediente1 =  new Engrediente(null, "Leite moça", 2, Medida.LITROS, receita);
 		Engrediente engrediente2 =  new Engrediente(null, "Fubá", 2, Medida.GRAMAS, receita);
-		Engrediente engrediente3 =  new Engrediente(null, "Creme de leite", 2, Medida.GRAMAS, receita);
+		Engrediente engrediente3 =  new Engrediente(null, "Leite", 2, Medida.GRAMAS, receita);
 		
 		receita.getEngredientes().addAll(Arrays.asList(engrediente1, engrediente2, engrediente3));
 	

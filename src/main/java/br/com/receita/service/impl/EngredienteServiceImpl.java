@@ -13,9 +13,14 @@ public class EngredienteServiceImpl implements EngredienteService {
 	@Autowired
 	private EngredienteRepository engredienteRepository;
 	
+	public EngredienteServiceImpl(EngredienteRepository engredienteRepository) {
+		this.engredienteRepository = engredienteRepository;
+	}
+
 	@Override
 	public Engrediente salvar(Engrediente engrediente) {
-		return engredienteRepository.save(engrediente);
+		engrediente = engredienteRepository.save(engrediente);
+		return engrediente;
 	}
 
 }
