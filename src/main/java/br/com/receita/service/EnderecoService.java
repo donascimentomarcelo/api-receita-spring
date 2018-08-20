@@ -4,7 +4,7 @@ import br.com.receita.domain.Endereco;
 
 public interface EnderecoService {
 
-	Endereco addEndereco(Integer usuario_id, Endereco endereco);
+	Endereco addEndereco(Endereco endereco);
 
 	Endereco pesquisarEndereco(Integer id);
 

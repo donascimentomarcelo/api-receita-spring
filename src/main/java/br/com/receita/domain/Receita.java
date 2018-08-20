@@ -1,87 +1,65 @@
 package br.com.receita.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import br.com.receita.domain.enums.Medida;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Engrediente implements Serializable{
+public class Receita implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	private String titulo;	
 	private String descricao;
-	private Integer quantidade;
-	private Integer medida;
 	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="id_receita")
-	private Receita receita;
+	@OneToMany(mappedBy = "receita", cascade=CascadeType.ALL)
+	private List<Engrediente> engredientes = new ArrayList<>();
 	
-	public Engrediente() {
+	public Receita() {
 		super();
 	}
-
-	public Engrediente(Integer id, String descricao, Integer quantidade, Medida medida, Receita receita) {
+	
+	public Receita(Integer id, String titulo, String descricao) {
 		super();
 		this.id = id;
+		this.titulo = titulo;
 		this.descricao = descricao;
-		this.quantidade = quantidade;
-		this.medida = (medida==null) ? null : medida.getCodigo();
-		this.receita = receita;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Integer getQuantidade() {
-		return quantidade;
+	public List<Engrediente> getEngredientes() {
+		return engredientes;
 	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setEngredientes(List<Engrediente> engredientes) {
+		this.engredientes = engredientes;
 	}
 	
-	public Medida getMedida() {
-		return Medida.toEnum(medida);
-	}
-
-	public void setMedida(Medida medida) {
-		this.medida = medida.getCodigo();
-	}
-	
-	public Receita getReceita() {
-		return receita;
-	}
-
-	public void setReceita(Receita receita) {
-		this.receita = receita;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,7 +67,6 @@ public class Engrediente implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,7 +75,7 @@ public class Engrediente implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Engrediente other = (Engrediente) obj;
+		Receita other = (Receita) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -106,6 +83,5 @@ public class Engrediente implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }

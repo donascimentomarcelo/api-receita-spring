@@ -23,9 +23,9 @@ public class EnderecoResource {
 	@Autowired
 	private EnderecoService enderecoService;
 	
-	@PostMapping("{usuario_id}/usuario")
-	ResponseEntity<Void> addEndereco(@PathVariable Integer usuario_id, @RequestBody Endereco endereco) {
-		Endereco end = enderecoService.addEndereco(usuario_id, endereco);
+	@PostMapping
+	ResponseEntity<Void> addEndereco(@RequestBody Endereco endereco) {
+		Endereco end = enderecoService.addEndereco(endereco);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 					.path("/{id}").buildAndExpand(end.getId()).toUri();
