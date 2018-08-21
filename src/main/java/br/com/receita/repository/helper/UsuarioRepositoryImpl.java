@@ -1,4 +1,4 @@
-package br.com.receita.repository.helper.impl;
+package br.com.receita.repository.helper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +9,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.filtro.UsuarioFiltro;
-import br.com.receita.repository.helper.UsuarioRepositoryQueries;
 
-@Service
-public class UsuarioRepositoryQueriesImpl implements UsuarioRepositoryQueries{
+@Component
+public class UsuarioRepositoryImpl implements UsuarioQueriesRepository{
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -25,8 +23,8 @@ public class UsuarioRepositoryQueriesImpl implements UsuarioRepositoryQueries{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> filtrar(UsuarioFiltro filtro) {
-		StringBuilder builder = new StringBuilder();
-		Map<String, Object> params = new HashMap<>();
+		final StringBuilder builder = new StringBuilder();
+		final Map<String, Object> params = new HashMap<>();
 		
 		builder.append("SELECT bean from Usuario bean where id is not null");
 		
