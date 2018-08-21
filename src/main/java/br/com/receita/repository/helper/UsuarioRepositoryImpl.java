@@ -28,24 +28,43 @@ public class UsuarioRepositoryImpl implements UsuarioQueriesRepository{
 		
 		builder.append("SELECT bean from Usuario bean where id is not null");
 		
+		preencherNomeSeNecessario(filtro, builder, params);
+		
+		preencherEmailSeNecessario(filtro, builder, params);
+		
+		Query query = entityManager.createQuery(builder.toString(), Usuario.class);
+		
+		preencherParametrosDaQuery(params, query);
+		
+		return query.getResultList();
+	}
+	
+	private void preencherParametrosDaQuery(final Map<String, Object> params, Query query) {
+		for(Map.Entry<String, Object> param : params.entrySet()) {
+			query.setParameter(param.getKey(), param.getValue());
+		}
+	}
+	
+	private void preencherNomeSeNecessario(
+			UsuarioFiltro filtro, 
+			final StringBuilder builder,
+			final Map<String, Object> params) {
+		
 		if (StringUtils.hasText(filtro.getNome())) {
 			builder.append(" and bean.nome LIKE :nome");
 			params.put("nome", "%" + filtro.getNome() + "%");
 		}
+	}
+
+	private void preencherEmailSeNecessario(
+			UsuarioFiltro filtro, 
+			final StringBuilder builder,
+			final Map<String, Object> params) {
 		
 		if (StringUtils.hasText(filtro.getEmail())) {
 			builder.append(" and bean.email LIKE :email");
 			params.put("nome", "%" + filtro.getEmail() + "%");
 		}
-		
-		Query query = entityManager.createQuery(builder.toString(), Usuario.class);
-		
-		for(Map.Entry<String, Object> param : params.entrySet()) {
-			query.setParameter(param.getKey(), param.getValue());
-		}
-		
-		return query.getResultList();
-	}
-	
+	}	
 	
 }
