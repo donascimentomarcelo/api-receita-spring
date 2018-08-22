@@ -63,7 +63,7 @@ public class UsuarioRepositoryImpl implements UsuarioQueriesRepository{
 		
 		if (StringUtils.hasText(filtro.getEmail())) {
 			builder.append(" and bean.email LIKE :email");
-			params.put("nome", "%" + filtro.getEmail() + "%");
+			params.put("email", "%" + filtro.getEmail() + "%");
 		}
 	}	
 	

@@ -41,6 +41,7 @@ public class UsuarioRepositoryTest {
 	public void filtro_dinamico () throws Exception {
 		UsuarioFiltro filtro = new UsuarioFiltro();
 		filtro.setNome("Cr");
+		filtro.setEmail("gmail");
 		
 		List<Usuario> lista = usuarioRepository.filtrar(filtro);
 		assertThat(lista.size()).isEqualTo(1);
