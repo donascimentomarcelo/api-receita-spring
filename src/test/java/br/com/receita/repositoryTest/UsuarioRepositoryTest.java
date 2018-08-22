@@ -23,8 +23,11 @@ import br.com.receita.repository.filtro.UsuarioFiltro;
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 @TestPropertySource("classpath:application-test.properties")
 public class UsuarioRepositoryTest {
-	
+	private static final String NOMEERRADO = "Manuel";
+	private static final String NOME = "cr";
 	private static final String EMAIL = "crane@gmail.com";
+	private static final String CEP = "21012409";
+	private static final String UF = "RJ";
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -38,12 +41,61 @@ public class UsuarioRepositoryTest {
 	}
 	
 	@Test
-	public void filtro_dinamico () throws Exception {
+	public void filtroDinamico () throws Exception {
 		UsuarioFiltro filtro = new UsuarioFiltro();
-		filtro.setNome("Cr");
-		filtro.setEmail("gmail");
+		filtro.setNome(NOME);
+		filtro.setEmail(EMAIL);
 		
 		List<Usuario> lista = usuarioRepository.filtrar(filtro);
 		assertThat(lista.size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void buscarUsuarioPeloCEP () throws Exception {
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setCep(CEP);
+		
+		List<Usuario> lista = usuarioRepository.filtrar(filtro);
+		assertThat(lista.size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void buscarUsuariosDoRj () throws Exception {
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setUf(UF);
+		
+		List<Usuario> lista = usuarioRepository.filtrar(filtro);
+		assertThat(lista.size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void buscarUsuariosPorUfECep () throws Exception {
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setCep(CEP);
+		filtro.setUf(UF);
+		
+		List<Usuario> lista = usuarioRepository.filtrar(filtro);
+		assertThat(lista.size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void buscarUsuariosPorTodosOsDados () throws Exception {
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setNome(NOME);
+		filtro.setEmail(EMAIL);
+		filtro.setCep(CEP);
+		filtro.setUf(UF);
+		
+		List<Usuario> lista = usuarioRepository.filtrar(filtro);
+		assertThat(lista.size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void trazerUsuarioNuloPorNome () throws Exception {
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setNome(NOMEERRADO);
+		
+		List<Usuario> lista = usuarioRepository.filtrar(filtro);
+		assertThat(lista.size()).isEqualTo(0);
 	}
 }

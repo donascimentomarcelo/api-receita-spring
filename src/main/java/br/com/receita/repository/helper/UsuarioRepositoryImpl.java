@@ -26,11 +26,15 @@ public class UsuarioRepositoryImpl implements UsuarioQueriesRepository{
 		final StringBuilder builder = new StringBuilder();
 		final Map<String, Object> params = new HashMap<>();
 		
-		builder.append("SELECT bean from Usuario bean where id is not null");
+		builder.append("SELECT bean from Usuario bean JOIN bean.endereco endereco where 1 = 1");
 		
 		preencherNomeSeNecessario(filtro, builder, params);
 		
 		preencherEmailSeNecessario(filtro, builder, params);
+		
+		preencherCEPSeNecessario(filtro, builder, params);
+		
+		preencherUfSeNecessario(filtro, builder, params);
 		
 		Query query = entityManager.createQuery(builder.toString(), Usuario.class);
 		
@@ -38,10 +42,23 @@ public class UsuarioRepositoryImpl implements UsuarioQueriesRepository{
 		
 		return query.getResultList();
 	}
-	
-	private void preencherParametrosDaQuery(final Map<String, Object> params, Query query) {
-		for(Map.Entry<String, Object> param : params.entrySet()) {
-			query.setParameter(param.getKey(), param.getValue());
+
+	private void preencherUfSeNecessario(UsuarioFiltro filtro, final StringBuilder builder,
+			final Map<String, Object> params) {
+		if (StringUtils.hasText(filtro.getUf())) {
+			builder.append(" and endereco.uf = :uf");
+			params.put("uf", filtro.getUf());
+		}
+	}
+
+	private void preencherCEPSeNecessario(
+			UsuarioFiltro filtro, 
+			final StringBuilder builder,
+			final Map<String, Object> params) {
+		
+		if (StringUtils.hasText(filtro.getCep())) {
+			builder.append(" and endereco.cep = :cep");
+			params.put("cep", filtro.getCep());
 		}
 	}
 	
@@ -67,4 +84,9 @@ public class UsuarioRepositoryImpl implements UsuarioQueriesRepository{
 		}
 	}	
 	
+	private void preencherParametrosDaQuery(final Map<String, Object> params, Query query) {
+		for(Map.Entry<String, Object> param : params.entrySet()) {
+			query.setParameter(param.getKey(), param.getValue());
+		}
+	}
 }
