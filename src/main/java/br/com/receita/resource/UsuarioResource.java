@@ -64,4 +64,11 @@ public class UsuarioResource {
 		
 		return ResponseEntity.ok().body(list);
 	}
+	
+	@GetMapping("/{email}/email")
+	public ResponseEntity<Usuario> pesquisarPorNomeEEmail(
+			@PathVariable("email") String email) throws UnicidadeEmailException{
+		Usuario usuario = usuarioService.findByEmail(email);
+		return ResponseEntity.ok().body(usuario);
+	}
 }	
