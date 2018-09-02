@@ -3,6 +3,7 @@ package br.com.receita.service;
 import java.util.List;
 
 import br.com.receita.domain.Usuario;
+import br.com.receita.repository.filtro.UsuarioFiltro;
 import br.com.receita.service.exception.UnicidadeEmailException;
 
 public interface UsuarioService {
@@ -18,5 +19,7 @@ public interface UsuarioService {
 	void verificarSeEmailExiste(String email) throws UnicidadeEmailException;
 
 	List<Usuario> pesquisaDinamica(Usuario usuario);
+
+	List<Usuario> filtro(UsuarioFiltro filtro);
 
 }

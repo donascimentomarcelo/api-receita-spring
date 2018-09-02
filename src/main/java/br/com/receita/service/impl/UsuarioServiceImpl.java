@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.UsuarioRepository;
+import br.com.receita.repository.filtro.UsuarioFiltro;
 import br.com.receita.service.UsuarioService;
 import br.com.receita.service.exception.UnicidadeEmailException;
 
@@ -44,7 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Usuario findByEmail(String email) throws UnicidadeEmailException {
 		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
-		
+
 		return optional.orElseThrow(() -> new UnicidadeEmailException());
 	}
 
@@ -94,6 +95,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 		}
 		
 		return query.getResultList();
+	}
+
+	@Override
+	public List<Usuario> filtro(UsuarioFiltro filtro) {
+		List<Usuario> usuarios = usuarioRepository.filtrar(filtro);
+		System.out.println(usuarios);
+		return usuarios;
 	}
 
 

@@ -30,6 +30,18 @@ public class UsuarioResourceTest extends ReceitaApplicationTests{
 	}
 	
 	@Test
+	public void retornarExcecaoAoBuscarPorEmailInexistente () throws Exception {
+		given()
+		.pathParam("email", "crane@hotmail.com")
+		.get("/api/v1/usuarios/{email}/email")
+		.then()
+			.log().body().and()
+			.statusCode(HttpStatus.NOT_FOUND.value())
+			.and()
+			.body("erro", equalTo("E-mail inexistente"));
+	}
+	
+	@Test
 	public void salvarUsuario () throws Exception {
 		Usuario usuario = new Usuario();
 		usuario.setNome("Manuel L.");
@@ -49,7 +61,8 @@ public class UsuarioResourceTest extends ReceitaApplicationTests{
 				.log().body()
 			.and()
 				.statusCode(HttpStatus.CREATED.value())
-				.header("Location", equalTo("http://localhost:"+porta+"/api/v1/usuarios/2"));			
+				.header("Location", equalTo("http://localhost:"+porta+"/api/v1/usuarios/2"));
+			
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -31,10 +32,10 @@ public class EnderecoServiceTest {
 	@MockBean
 	private EnderecoRepository enderecoRepository;
 	private EnderecoService enderecoService;
-	@MockBean
+	@Mock
 	private EnderecoServiceImpl enderecoServiceImpl;
 	
-	@MockBean
+	@Mock
 	private UsuarioRepository usuarioRepository;
 	
 	private Endereco endereco;

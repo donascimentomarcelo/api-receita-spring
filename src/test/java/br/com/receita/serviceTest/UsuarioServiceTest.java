@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.UsuarioRepository;
+import br.com.receita.repository.filtro.UsuarioFiltro;
 import br.com.receita.service.UsuarioService;
 import br.com.receita.service.impl.UsuarioServiceImpl;
 
@@ -50,42 +51,41 @@ public class UsuarioServiceTest {
 		listaUsuarios = new ArrayList<Usuario>();
 		listaUsuarios.add(0, usuario);
 		
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setNome(NOME);
+		filtro.setEmail(EMAIL);
+		
 		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
-		when(usuarioServiceImpl.findByEmail(EMAIL)).thenReturn(usuario);
-		when(usuarioServiceImpl.pesquisaDinamica(usuario)).thenReturn(listaUsuarios);
+		when(usuarioService.findByEmail(EMAIL)).thenReturn(usuario);
+		when(usuarioService.filtro(filtro)).thenReturn(listaUsuarios);
 	}
 	
 	@Test
-	public void salvarUsuarioNoRepositorio() throws Exception{
+	public void salvar_usuario_no_repositorio() throws Exception{
 		usuarioService.salvar(usuario);
 		
 		verify(usuarioRepository).save(usuario);
 	}
 	
 	@Test//(expected = UnicidadeEmailException.class)
-	public void naoSalvarDoisUsuariosComMesmoEmail() throws Exception {
+	public void nao_salvar_dois_usuarios_com_mesmo_email() throws Exception {
 		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.of(usuario));
 		
 		usuarioRepository.save(usuario);
 	}
 	
 	@Test
-	public void verificarSeEmailJaEstaCadastrado() throws Exception {
-		when(usuarioServiceImpl.findByEmail(EMAIL)).thenReturn(usuario);
+	public void filtro_pelo_nome_e_email () {
+		//cenario
+		UsuarioFiltro filtro = new UsuarioFiltro();
+		filtro.setNome(NOME);
+		filtro.setEmail(EMAIL);
 		
-		Usuario usr = usuarioServiceImpl.findByEmail(EMAIL);
+		//acao
+		when(usuarioService.filtro(filtro)).thenReturn(listaUsuarios);
 		
-		assertThat(usr.getNome()).isEqualTo(NOME);
-	}
-	
-	@Test
-	public void pesquisaDinamica() throws Exception {
-		Usuario usr = new Usuario();
-		usr.setNome(NOME);
-		usr.setEmail(EMAIL);
-		when(usuarioServiceImpl.pesquisaDinamica(usr)).thenReturn(listaUsuarios);
-
-		List<Usuario> list = usuarioServiceImpl.pesquisaDinamica(usr);
+		//verificacao
+		List<Usuario> list = usuarioService.filtro(filtro);
 		assertThat(list.get(0).getNome()).isEqualTo(NOME);
 	}
 	
