@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.receita.domain.Usuario;
 import br.com.receita.service.UsuarioService;
+import br.com.receita.service.exception.ObjetoNaoEncontradoException;
 import br.com.receita.service.exception.UnicidadeEmailException;
 
 @RestController
@@ -67,8 +68,8 @@ public class UsuarioResource {
 	
 	@GetMapping("/{email}/email")
 	public ResponseEntity<Usuario> pesquisarPorNomeEEmail(
-			@PathVariable("email") String email) throws UnicidadeEmailException{
-		Usuario usuario = usuarioService.findByEmail(email);
+			@PathVariable("email") String email) throws ObjetoNaoEncontradoException{
+		Usuario usuario = usuarioService.verificaSeEmailExiste(email);
 		return ResponseEntity.ok().body(usuario);
 	}
 }	

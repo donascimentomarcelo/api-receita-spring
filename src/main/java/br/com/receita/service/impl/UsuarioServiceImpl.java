@@ -14,6 +14,7 @@ import br.com.receita.domain.Usuario;
 import br.com.receita.repository.UsuarioRepository;
 import br.com.receita.repository.filtro.UsuarioFiltro;
 import br.com.receita.service.UsuarioService;
+import br.com.receita.service.exception.ObjetoNaoEncontradoException;
 import br.com.receita.service.exception.UnicidadeEmailException;
 
 @Service
@@ -45,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Usuario findByEmail(String email) throws UnicidadeEmailException {
 		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
-
+		
 		return optional.orElseThrow(() -> new UnicidadeEmailException());
 	}
 
@@ -102,6 +103,16 @@ public class UsuarioServiceImpl implements UsuarioService{
 		List<Usuario> usuarios = usuarioRepository.filtrar(filtro);
 		System.out.println(usuarios);
 		return usuarios;
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.UsuarioService#verificaSeEmailExiste(java.lang.String)
+	 */
+	@Override
+	public Usuario verificaSeEmailExiste(String email) throws ObjetoNaoEncontradoException {
+		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
+		
+		return optional.orElseThrow(() -> new ObjetoNaoEncontradoException("Usuario não encontrado"));
 	}
 
 

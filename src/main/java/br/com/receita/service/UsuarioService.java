@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.filtro.UsuarioFiltro;
+import br.com.receita.service.exception.ObjetoNaoEncontradoException;
 import br.com.receita.service.exception.UnicidadeEmailException;
 
 public interface UsuarioService {
@@ -21,5 +22,11 @@ public interface UsuarioService {
 	List<Usuario> pesquisaDinamica(Usuario usuario);
 
 	List<Usuario> filtro(UsuarioFiltro filtro);
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	Usuario verificaSeEmailExiste(String email) throws ObjetoNaoEncontradoException;
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.receita.service.exception.ObjetoNaoEncontradoException;
 import br.com.receita.service.exception.StandardError;
@@ -19,6 +20,7 @@ import br.com.receita.service.exception.StandardError;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 	
+	@ExceptionHandler(ObjetoNaoEncontradoException.class)
 	public ResponseEntity<StandardError> objetoNaoEncontrado(
 			ObjetoNaoEncontradoException e, 
 			HttpServletRequest req) {

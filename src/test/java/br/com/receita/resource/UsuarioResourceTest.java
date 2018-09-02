@@ -32,13 +32,13 @@ public class UsuarioResourceTest extends ReceitaApplicationTests{
 	@Test
 	public void retornarExcecaoAoBuscarPorEmailInexistente () throws Exception {
 		given()
-		.pathParam("email", "crane@hotmail.com")
+		.pathParam("email", "crane6@hotmail.com")
 		.get("/api/v1/usuarios/{email}/email")
 		.then()
 			.log().body().and()
 			.statusCode(HttpStatus.NOT_FOUND.value())
 			.and()
-			.body("erro", equalTo("E-mail inexistente"));
+			.body("msg", equalTo("Usuario não encontrado"));
 	}
 	
 	@Test
