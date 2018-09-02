@@ -56,7 +56,7 @@ public class UsuarioServiceTest {
 		filtro.setEmail(EMAIL);
 		
 		when(usuarioRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
-		when(usuarioService.findByEmail(EMAIL)).thenReturn(usuario);
+		when(usuarioServiceImpl.findByEmail(EMAIL)).thenReturn(usuario);
 		when(usuarioService.filtro(filtro)).thenReturn(listaUsuarios);
 	}
 	
