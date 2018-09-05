@@ -43,6 +43,7 @@ public class EnderecoRepositoryTest {
 	private EnderecoRepository enderecoRepository;
 	
 	private EnderecoFiltro filtro;
+	private Endereco endereco;
 	
 	@Test
 	public void filtrar_por_todos_os_dados_de_endereco() throws Exception{
@@ -77,5 +78,26 @@ public class EnderecoRepositoryTest {
 		
 		//verificacao
 		assertThat(listaDeEndereco.get(0).getUf()).isEqualTo(UF);
+	}
+	
+	@Test
+	public void verificar_se_endereco_esta_sendo_persistido () throws Exception {
+		//cenario
+		endereco = new Endereco();
+		endereco.setBairro("Rua feliz");
+		endereco.setCep("21444120");
+		endereco.setLocalidade("Quadra 49");
+		endereco.setUf("SP");
+		endereco.setComplemento("Rua 2");
+		//acao
+		
+		Endereco end = enderecoRepository.save(endereco);
+		
+		//verificacao
+		assertThat(end.getBairro()).isEqualTo(endereco.getBairro());
+		assertThat(end.getCep()).isEqualTo(endereco.getCep());
+		assertThat(end.getLocalidade()).isEqualTo(endereco.getLocalidade());
+		assertThat(end.getUf()).isEqualTo(endereco.getUf());
+		assertThat(end.getComplemento()).isEqualTo(endereco.getComplemento());
 	}
 }
