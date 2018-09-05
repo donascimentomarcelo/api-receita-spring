@@ -19,7 +19,6 @@ import br.com.receita.domain.Usuario;
 import br.com.receita.repository.UsuarioRepository;
 import br.com.receita.repository.filtro.UsuarioFiltro;
 
-//@Sql(value = "/limpar-dados.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/insere-dados.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/limpar-dados.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @RunWith(SpringRunner.class)

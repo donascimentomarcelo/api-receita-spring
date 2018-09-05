@@ -35,7 +35,6 @@ public class EnderecoServiceImpl implements EnderecoService{
 			e.getMessage();
 		}
 
-		
 		endereco = enderecoRepository.save(endereco);
 		return endereco;
 	}

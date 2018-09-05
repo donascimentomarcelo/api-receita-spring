@@ -58,7 +58,24 @@ public class EnderecoRepositoryTest {
 		List<Endereco> listaDeEndereco = enderecoRepository.filtrar(filtro);
 		
 		//verificacao
-		assertThat(listaDeEndereco.size()).isEqualTo(1);
+		assertThat(listaDeEndereco.get(0).getUf()).isEqualTo(UF);
+		assertThat(listaDeEndereco.get(0).getCep()).isEqualTo(CEP);
+		assertThat(listaDeEndereco.get(0).getBairro()).isEqualTo(BAIRRO);
+		assertThat(listaDeEndereco.get(0).getComplemento()).isEqualTo(COMPLEMENTO);
+		assertThat(listaDeEndereco.get(0).getLocalidade()).isEqualTo(LOCALIDADE);
 		
+	}
+	
+	@Test
+	public void filtrar_enderecos_do_rj () throws Exception {
+		//cenario
+		filtro = new EnderecoFiltro();
+		filtro.setUf(UF);
+		
+		//acao
+		List<Endereco> listaDeEndereco = enderecoRepository.filtrar(filtro);
+		
+		//verificacao
+		assertThat(listaDeEndereco.get(0).getUf()).isEqualTo(UF);
 	}
 }
