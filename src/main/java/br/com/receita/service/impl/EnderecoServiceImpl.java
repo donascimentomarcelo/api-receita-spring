@@ -10,7 +10,7 @@ import br.com.receita.domain.Usuario;
 import br.com.receita.repository.EnderecoRepository;
 import br.com.receita.repository.UsuarioRepository;
 import br.com.receita.service.EnderecoService;
-import br.com.receita.service.exception.UnicidadeEmailException;
+import br.com.receita.service.exception.ObjetoNaoEncontradoException;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService{
@@ -57,7 +57,7 @@ public class EnderecoServiceImpl implements EnderecoService{
 		//Apos implementar jwt, retornar id do usuario logado
 		Optional<Usuario> optional = usuarioRepository.findById(1);
 		
-		return optional.orElseThrow(() -> new UnicidadeEmailException());
+		return optional.orElseThrow(() -> new ObjetoNaoEncontradoException("Usuario não encontrado"));
 	}
 	
 }
