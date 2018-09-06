@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario findByEmail(String email) throws UnicidadeEmailException {
 		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
 		
-		return optional.orElseThrow(() -> new UnicidadeEmailException());
+		return optional.orElseThrow(() -> new UnicidadeEmailException("O e-mail "+ email +" já está sendo usado."));
 	}
 
 	@Override
@@ -67,37 +66,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Optional<Usuario> optional = usuarioRepository.findByEmail(email);
 		
 		if (optional.isPresent()) {
-			throw new UnicidadeEmailException();
+			throw new UnicidadeEmailException("O e-mail "+ email +" já está sendo usado.");
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Usuario> pesquisaDinamica(Usuario usuario) {
-		StringBuilder builder = new StringBuilder("SELECT bean from Usuario bean where id is not null");
-		
-		
-		if (usuario.getNome() != null) {
-			builder.append(" and bean.nome = :nome");
-		}
-		
-		if (usuario.getEmail() != null) {
-			builder.append(" and bean.email = :email");
-		}
-		
-		Query query = entityManager.createQuery(builder.toString());
-		
-		if (usuario.getNome() != null) {
-			query.setParameter("nome", usuario.getNome());
-		}
-		
-		if (usuario.getEmail() != null) {
-			query.setParameter("email", usuario.getEmail());
-		}
-		
-		return query.getResultList();
-	}
-
 	@Override
 	public List<Usuario> filtro(UsuarioFiltro filtro) {
 		List<Usuario> usuarios = usuarioRepository.filtrar(filtro);
