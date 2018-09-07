@@ -57,8 +57,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Usuario pesquisarPorId(Integer id) {
-		Usuario usuario = usuarioRepository.findOne(id);
-		return usuario;
+		Optional<Usuario> optional = usuarioRepository.findById(id);
+		return optional.orElseThrow(() -> new ObjetoNaoEncontradoException("Usuário não encontrado"));
 	}
 
 	@Override
