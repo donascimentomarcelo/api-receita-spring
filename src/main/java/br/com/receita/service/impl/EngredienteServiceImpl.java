@@ -35,4 +35,16 @@ public class EngredienteServiceImpl implements EngredienteService{
 		return lista;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.EngredienteService#atualizar(br.com.receita.domain.Engrediente)
+	 * @param engrediente
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 20:53:32
+	 */
+	@Override
+	public void atualizar(Engrediente engrediente) {
+		engredienteRepository.save(engrediente);
+	}
+
 }

@@ -15,4 +15,14 @@ public interface EngredienteService {
 	 */
 	List<Engrediente> filtrar(EngredienteFiltro filtro);
 
+	/**
+	 * @param engrediente
+	 * @Author Marcelo Nascimento
+	 * @Date 12 de set de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc 
+	 */
+	void atualizar(Engrediente engrediente);
+
 }
