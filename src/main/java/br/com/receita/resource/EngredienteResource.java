@@ -1,9 +1,11 @@
 package br.com.receita.resource;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,5 +40,11 @@ public class EngredienteResource {
 		engredienteService.atualizar(engrediente);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping
+	ResponseEntity<List<Engrediente>> listar() {
+		List<Engrediente> lista = engredienteService.listar();
+		return ResponseEntity.ok().body(lista);
 	}
 }

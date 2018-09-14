@@ -47,4 +47,16 @@ public class EngredienteServiceImpl implements EngredienteService{
 		engredienteRepository.save(engrediente);
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.EngredienteService#listar()
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 21:29:49
+	 */
+	@Override
+	public List<Engrediente> listar() {
+		return engredienteRepository.findAll();
+	}
+
 }

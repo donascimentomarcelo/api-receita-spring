@@ -25,4 +25,14 @@ public interface EngredienteService {
 	 */
 	void atualizar(Engrediente engrediente);
 
+	/**
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 13 de set de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc 
+	 */
+	List<Engrediente> listar();
+
 }
