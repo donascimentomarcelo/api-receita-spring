@@ -1,6 +1,7 @@
 package br.com.receita.resource;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -57,5 +58,34 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 		.put("/api/v1/engredientes/3")
 		.then()
 			.statusCode(HttpStatus.NO_CONTENT.value());
+	}
+	
+	@Test
+	public void deve_listar_todas_as_receitas () throws Exception {
+		given()
+			.request()
+			.header("Accept", ContentType.ANY)
+			.header("content-type", ContentType.JSON)
+		.get("/api/v1/engredientes")
+		.then()
+			.log().headers()
+		.and()
+			.log().body()
+		.and()
+			.statusCode(HttpStatus.OK.value())
+			.body("id[0]", equalTo(1))
+			.body("descricao[0]", equalTo("Leite moça"))
+			.body("quantidade[0]", equalTo(2))
+			.body("medida[0]", equalTo("GRAMAS"))
+			
+			.body("id[1]", equalTo(2))
+			.body("descricao[1]", equalTo("Fubá"))
+			.body("quantidade[1]", equalTo(3))
+			.body("medida[1]", equalTo("QUILOS"))
+			
+			.body("id[2]", equalTo(3))
+			.body("descricao[2]", equalTo("Leite"))
+			.body("quantidade[2]", equalTo(8))
+			.body("medida[2]", equalTo("LITROS"));
 	}
 }
