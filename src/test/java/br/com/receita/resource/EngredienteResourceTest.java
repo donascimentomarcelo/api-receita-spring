@@ -25,7 +25,7 @@ import io.restassured.http.ContentType;
 public class EngredienteResourceTest extends ReceitaApplicationTests{
 	
 	@Test
-	public void deve_salvar_receita () throws Exception {
+	public void deve_salvar_ingrediente () throws Exception {
 		Engrediente engrediente = new Engrediente();
 		engrediente.setDescricao("Leite 2");
 		engrediente.setMedida(Medida.LITROS);
@@ -43,7 +43,7 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 	}
 	
 	@Test
-	public void deve_atualizar_receita () throws Exception {
+	public void deve_atualizar_ingrediente () throws Exception {
 		Engrediente engrediente = new Engrediente();
 		engrediente.setDescricao("Leite 2");
 		engrediente.setMedida(Medida.MILILITROS);
@@ -61,7 +61,7 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 	}
 	
 	@Test
-	public void deve_listar_todas_as_receitas () throws Exception {
+	public void deve_listar_todas_as_ingredientes () throws Exception {
 		given()
 			.request()
 			.header("Accept", ContentType.ANY)
@@ -87,5 +87,21 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 			.body("descricao[2]", equalTo("Leite"))
 			.body("quantidade[2]", equalTo(8))
 			.body("medida[2]", equalTo("LITROS"));
+	}
+	
+	@Test
+	public void deve_pesquisar_ingrediente_por_id () throws Exception {
+		given()
+			.request()
+			.header("Accept", ContentType.ANY)
+			.header("content-type", ContentType.JSON)
+		.get("/api/v1/engredientes/1")
+		.then()
+			.log().headers()
+		.and()
+			.log().body()
+		.and()
+		.statusCode(HttpStatus.OK.value())
+		.body("id", equalTo(1));
 	}
 }
