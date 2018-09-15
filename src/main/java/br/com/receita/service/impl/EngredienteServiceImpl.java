@@ -9,6 +9,7 @@ import br.com.receita.domain.Engrediente;
 import br.com.receita.repository.EngredienteRepository;
 import br.com.receita.repository.filtro.EngredienteFiltro;
 import br.com.receita.service.EngredienteService;
+import br.com.receita.service.exception.ObjetoNaoEncontradoException;
 
 @Service
 public class EngredienteServiceImpl implements EngredienteService{
@@ -70,6 +71,10 @@ public class EngredienteServiceImpl implements EngredienteService{
 	@Override
 	public Engrediente pesquisar(Integer id) {
 		Engrediente engrediente = engredienteRepository.findOne(id);
+		if(engrediente == null) {
+			throw new ObjetoNaoEncontradoException("Ingrediente não encontrado");
+		}
+		
 		return engrediente;
 	}
 
