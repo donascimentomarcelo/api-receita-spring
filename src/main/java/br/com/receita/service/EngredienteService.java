@@ -35,4 +35,15 @@ public interface EngredienteService {
 	 */
 	List<Engrediente> listar();
 
+	/**
+	 * @param id
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 15 de set de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc 
+	 */
+	Engrediente pesquisar(Integer id);
+
 }

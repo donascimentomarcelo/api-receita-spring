@@ -47,4 +47,10 @@ public class EngredienteResource {
 		List<Engrediente> lista = engredienteService.listar();
 		return ResponseEntity.ok().body(lista);
 	}
+	
+	@GetMapping("{id}")
+	ResponseEntity<Engrediente> pesquisar(@PathVariable Integer id) {
+		Engrediente engrediente = engredienteService.pesquisar(id);
+		return ResponseEntity.ok(engrediente);
+	}
 }

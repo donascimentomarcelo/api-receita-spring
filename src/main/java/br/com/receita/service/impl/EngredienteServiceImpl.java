@@ -59,4 +59,18 @@ public class EngredienteServiceImpl implements EngredienteService{
 		return engredienteRepository.findAll();
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.EngredienteService#pesquisar(java.lang.Integer)
+	 * @param id
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 00:20:43
+	 */
+	@Override
+	public Engrediente pesquisar(Integer id) {
+		Engrediente engrediente = engredienteRepository.findOne(id);
+		return engrediente;
+	}
+
 }
