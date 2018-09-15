@@ -147,4 +147,27 @@ public class UsuarioResourceTest extends ReceitaApplicationTests{
 			.body("msg", equalTo("Usuário não encontrado"));
 			
 	}
+	
+	@Test
+	public void deve_listar_todos_os_usuarios_com_seus_enderecos() throws Exception {
+		given()
+		.get("/api/v1/usuarios")
+		.then()
+			.log().body().and()
+			.statusCode(HttpStatus.OK.value())
+			.and()
+			.body(
+					"id[0]", equalTo(1),
+					"nome[0]", equalTo("Crane"),
+					"email[0]", equalTo("crane@gmail.com"),
+					"endereco[0].id[0]", equalTo(1),
+					"endereco[0].bairro[0]", equalTo("Braz de pina"),
+					"endereco[0].cep[0]", equalTo("21012409"),
+					"endereco[0].complemento[0]", equalTo("Rua Trinta e Seis - Braz de Pina"),
+					"endereco[0].localidade[0]", equalTo("Quadra C9"),
+					"endereco[0].logradouro[0]", equalTo(null),
+					"endereco[0].uf[0]", equalTo("RJ")
+					);
+			
+	}
 }
