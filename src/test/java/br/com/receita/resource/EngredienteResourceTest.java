@@ -102,6 +102,26 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 			.log().body()
 		.and()
 		.statusCode(HttpStatus.OK.value())
-		.body("id", equalTo(1));
+		.body("id", equalTo(1))
+		.body("descricao", equalTo("Leite moça"))
+		.body("quantidade", equalTo(2))
+		.body("medida", equalTo("GRAMAS"));
+	}
+
+	@Test
+	public void deve_retornar_excecao_ao_pesquisar_ingrediente_por_id_invalido () throws Exception {
+		given()
+			.request()
+			.header("Accept", ContentType.ANY)
+			.header("content-type", ContentType.JSON)
+		.get("/api/v1/engredientes/7")
+		.then()
+			.log().headers()
+		.and()
+			.log().body()
+		.and()
+		.statusCode(HttpStatus.NOT_FOUND.value())
+		.body("status", equalTo(404))
+		.body("msg", equalTo("Ingrediente não encontrado"));
 	}
 }
