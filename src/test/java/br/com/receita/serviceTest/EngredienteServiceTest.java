@@ -1,6 +1,8 @@
 package br.com.receita.serviceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -156,5 +158,15 @@ public class EngredienteServiceTest {
 		assertThat(list.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 		assertThat(list.get(0).getMedida()).isEqualTo(MEDIDA);
 
+	}
+	
+	@Test
+	public void deve_testar_hashcode() {
+		Engrediente e1 = new Engrediente(1, DESCRICAO, QUANTIDADE, MEDIDA, null);
+		Engrediente e2 = new Engrediente(1, DESCRICAO, QUANTIDADE, MEDIDA, null);
+		
+		assertNotSame(e1, e2);
+		assertEquals(e1, e2);
+		assertEquals(e1.hashCode(), e2.hashCode());
 	}
 }

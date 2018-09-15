@@ -1,6 +1,8 @@
 package br.com.receita.serviceTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -89,5 +91,13 @@ public class UsuarioServiceTest {
 		assertThat(list.get(0).getNome()).isEqualTo(NOME);
 	}
 	
-	
+	@Test
+	public void deve_testar_hashcode() {
+		Usuario u1 = new Usuario(1, NOME, EMAIL, SENHA);
+		Usuario u2 = new Usuario(1, NOME, EMAIL, SENHA);
+		
+		assertNotSame(u1, u2);
+		assertEquals(u1, u2);
+		assertEquals(u1.hashCode(), u2.hashCode());
+	}
 }

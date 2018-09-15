@@ -1,5 +1,7 @@
 package br.com.receita.serviceTest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -65,5 +67,14 @@ public class EnderecoServiceTest {
 		enderecoService.addEndereco(endereco);
 		verify(enderecoRepository).save(endereco);
 	}
-
+	
+	@Test
+	public void deve_testar_hashcode() {
+		Endereco e1 = new Endereco(1, BAIRRO, CEP, COMPLEMENTO, LOCALIDADE, LOGRADOURO, UF);
+		Endereco e2 = new Endereco(1, BAIRRO, CEP, COMPLEMENTO, LOCALIDADE, LOGRADOURO, UF);
+		
+		assertNotSame(e1, e2);
+		assertEquals(e1, e2);
+		assertEquals(e1.hashCode(), e2.hashCode());
+	}
 }
