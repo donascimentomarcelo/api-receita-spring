@@ -1,0 +1,22 @@
+image: java:8
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: gradle:jdk
+  script: 
+    - gradle build
+  artifacts:
+    paths:
+      - receita-0.0.1.jar
+
+production:
+  stage: deploy
+  image: ubuntu:latest
+  script:
+    - apt-get update
+    - apt-get -y install openssh-client
+    - scp receita-0.0.1.jar target.server:/receita-0.0.1.jar
