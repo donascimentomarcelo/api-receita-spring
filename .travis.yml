@@ -1,0 +1,26 @@
+language: java
+jdk: oraclejdk8
+
+script: mvnw install
+
+after_success:
+  - pwd
+  - mkdir $HOME/buildApk/
+  - ls -l
+  - cd $HOME/buildApk/
+  - pwd
+  - ls -l
+  - git config --global user.email "marcelojunin2010@hotmail.com"
+  - git config --global user.name "Marcelo Nascimento"
+  - git clone --depth=50 --branch=master https://github.com/marcelojunin/ReceitaAPI.git
+  - cd ReceitaAPI
+  - ls -l
+  - cp -r /home/travis/build/marcelojunin/ReceitaAPI/target $HOME/buildApk/ReceitaAPI
+  - ls -l
+  - git add -f
+  - git remote rm origin
+  - git remote add origin https://marcelojunin:$GITHUB_API_KEY@github.com/marcelojunin/ReceitaAPI.git
+  - git add -f
+  - git commit -m "Travis build $TRAVIS_BUILD_NUMBER"
+  - git push -fq origin master
+  - echo -e "It's done"
