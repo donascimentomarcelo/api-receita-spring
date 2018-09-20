@@ -1,23 +1,50 @@
-image: maven:3-jdk-8 
-
 before_script:
-    - java -version
-    - mvn -version
-    - apt-get update
-    - apt-get install -y heroku-toolbelt
-    - gem install dpl
+ - echo "Execute scripts which are required to bootstrap the application. !"
 
-    variables:
-      MAVEN_OPTS: "-Dmaven.repo.local=.m2"
-
+after_script:
+ - echo "Clean up activity can be done here !."
+ 
 cache:
-  paths:
-    - .m2/
-
+ paths:
+ - /root/.m2/repository
+ 
 stages:
-  - deploy
+ - build
+ - deploy
 
-deploy:
-  type: deploy
-  script:
-    - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
+build:
+ stage: build
+ image: maven:3.3.9-jdk-8
+ script:
+ - mvn clean package
+ tags:
+ - docker
+ 
+deploy_dev:
+ stage: deploy
+ image: ruby:2.3
+ script:
+ - apt-get update -qy
+ - apt-get install -y ruby-dev
+ - gem install dpl
+ - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
+ environment:
+ name: dev
+#  only:
+#  - master
+#  tags:
+#  - docker
+ 
+deploy_staging:
+ stage: deploy
+ image: ruby:2.3
+ script:
+ - apt-get update -qy
+ - apt-get install -y ruby-dev
+ - gem install dpl
+ - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
+ environment:
+ name: staging
+#  url: https://vel-ci-api-stg.herokuapp.com
+#  only:
+#  - master
