@@ -17,4 +17,7 @@ stages:
 deploy:
   type: deploy
   script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
   - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
