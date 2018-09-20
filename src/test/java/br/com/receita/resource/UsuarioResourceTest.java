@@ -65,7 +65,7 @@ public class UsuarioResourceTest extends ReceitaApplicationTests{
 				.log().body()
 			.and()
 				.statusCode(HttpStatus.CREATED.value())
-				.header("Location", equalTo("http://localhost:"+porta+"/api/v1/usuarios/2"));
+				.header("Location", equalTo("http://localhost:"+porta+"/api/v1/usuarios/51"));
 			
 	}
 	

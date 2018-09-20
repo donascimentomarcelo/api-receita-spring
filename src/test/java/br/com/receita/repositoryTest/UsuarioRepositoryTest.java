@@ -27,7 +27,7 @@ import br.com.receita.repository.filtro.UsuarioFiltro;
 @TestPropertySource("classpath:application-test.properties")
 public class UsuarioRepositoryTest {
 	private static final String NOMEERRADO = "Manuel";
-	private static final String NOME = "cr";
+	private static final String NOME = "Cr";
 	private static final String EMAIL = "crane@gmail.com";
 	private static final String CEP = "21012409";
 	private static final String UF = "RJ";
