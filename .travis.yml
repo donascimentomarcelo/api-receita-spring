@@ -1,0 +1,21 @@
+image: maven:3-jdk-8 
+
+before_script:
+    - java -version
+    - mvn -version
+
+    variables:
+      MAVEN_OPTS: "-Dmaven.repo.local=.m2"
+
+cache:
+  paths:
+    - .m2/
+
+stages:
+  - deploy
+
+deploy:
+  provider: heroku
+  api-key: 
+    secure: $HEROKU_API_KEY
+  app: receita-api-spring-boot
