@@ -47,4 +47,4 @@ deploy_staging:
  name: staging
 #  url: https://vel-ci-api-stg.herokuapp.com
 #  only:
-#  - master
+#  - master 
