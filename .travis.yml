@@ -15,7 +15,6 @@ stages:
   - deploy
 
 deploy:
-  provider: heroku
-  api-key: 
-    secure: $HEROKU_API_KEY
-  app: receita-api-spring-boot
+  type: deploy
+  script:
+  - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
