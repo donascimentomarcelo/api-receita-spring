@@ -1,16 +1,12 @@
-before_script:
- - echo "Execute scripts which are required to bootstrap the application. !"
+image: maven:3.3.9-jdk-8
 
-after_script:
- - echo "Clean up activity can be done here !."
+stages:
+ - build
+ - deploy
  
 cache:
  paths:
  - /root/.m2/repository
- 
-stages:
- - build
- - deploy
 
 build:
  stage: build
@@ -28,12 +24,6 @@ deploy_dev:
  - apt-get install -y ruby-dev
  - gem install dpl
  - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
- environment:
- name: dev
-#  only:
-#  - master
-#  tags:
-#  - docker
  
 deploy_staging:
  stage: deploy
@@ -43,8 +33,3 @@ deploy_staging:
  - apt-get install -y ruby-dev
  - gem install dpl
  - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
- environment:
- name: staging
-#  url: https://vel-ci-api-stg.herokuapp.com
-#  only:
-#  - master 
