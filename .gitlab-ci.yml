@@ -6,9 +6,7 @@ stages:
 
 build:
  stage: build
- script: 
- - chmod +x ./gradlew build connectedCheck
- - ./mvnw package
+ script: chmod +x ./mvnw package
  artifacts:
   paths:
     - target/receita-0.0.1-SNAPSHOT.jar
