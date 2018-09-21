@@ -4,12 +4,15 @@ stages:
  - build
  - deploy
 
+before_install:
+ - chmod +x gradlew
+
 build:
  stage: build
  script: ./mvnw package
  artifacts:
   paths:
-    - target/demo-0.0.1-SNAPSHOT.jar
+    - target/receita-0.0.1-SNAPSHOT.jar
  
 production:
  stage: deploy
