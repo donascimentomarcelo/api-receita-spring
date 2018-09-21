@@ -1,4 +1,4 @@
-image: java:8
+image: maven:3-jdk-8
 
 stages:
  - build
@@ -6,7 +6,7 @@ stages:
 
 build:
  stage: build
-#  script: chmod +x ./mvnw package
+ script: "mvn package"
  artifacts:
   paths:
     - target/receita-0.0.1-SNAPSHOT.jar
