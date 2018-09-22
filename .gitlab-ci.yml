@@ -4,19 +4,18 @@ stages:
  - build
  - deploy
 
-build:
+spring:
  stage: build
  script: "mvn package"
  artifacts:
   paths:
     - target/receita-0.0.1-SNAPSHOT.jar
- spring:
-  datasource:
-    url: postgres://kaklydapdxrbrs:926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09@ec2-54-83-27-165.compute-1.amazonaws.com:5432/ddmo50acvro07i
-    username: kaklydapdxrbrs
-    password: 926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09
+ datasource:
+  url: postgres://kaklydapdxrbrs:926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09@ec2-54-83-27-165.compute-1.amazonaws.com:5432/ddmo50acvro07i
+  username: kaklydapdxrbrs
+  password: 926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09
  
-production:
+spring:
  stage: deploy
  image: ruby:2.3
  script:
@@ -24,3 +23,7 @@ production:
  - apt-get install -y ruby-dev
  - gem install dpl
  - dpl --provider=heroku --app=receita-api-spring-boot --api-key=$HEROKU_API_KEY
+ datasource:
+  url: postgres://kaklydapdxrbrs:926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09@ec2-54-83-27-165.compute-1.amazonaws.com:5432/ddmo50acvro07i
+  username: kaklydapdxrbrs
+  password: 926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09
