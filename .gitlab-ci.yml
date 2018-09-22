@@ -10,6 +10,11 @@ build:
  artifacts:
   paths:
     - target/receita-0.0.1-SNAPSHOT.jar
+ spring:
+  datasource:
+    url: postgres://kaklydapdxrbrs:926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09@ec2-54-83-27-165.compute-1.amazonaws.com:5432/ddmo50acvro07i
+    username: kaklydapdxrbrs
+    password: 926cecbfee30442e4a4468883a9f73c18d76619b060adbc39e7e2cdcd2ec7f09
  
 production:
  stage: deploy
