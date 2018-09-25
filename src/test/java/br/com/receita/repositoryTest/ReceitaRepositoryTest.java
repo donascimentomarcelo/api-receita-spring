@@ -2,6 +2,8 @@ package br.com.receita.repositoryTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +68,18 @@ public class ReceitaRepositoryTest {
 		assertThat(rec.getId()).isEqualTo(1);
 		assertThat(rec.getTitulo()).isEqualTo(TITULO1);
 		assertThat(rec.getDescricao()).isEqualTo(DESC1);
+	}
+
+	@Test
+	public void deve_listar_todas_as_receitas() throws Exception {
+		//cenario
+		
+		//acao
+		List<Receita> listaDeReceitas = receitaRepository.findAll();
+		
+		//verificacao
+		assertThat(listaDeReceitas.get(0).getId()).isEqualTo(1);
+		assertThat(listaDeReceitas.get(0).getTitulo()).isEqualTo(TITULO1);
+		assertThat(listaDeReceitas.get(0).getDescricao()).isEqualTo(DESC1);
 	}
 }
