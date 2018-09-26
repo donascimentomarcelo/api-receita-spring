@@ -1,5 +1,7 @@
 package br.com.receita.serviceTest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -9,6 +11,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.receita.domain.Endereco;
 import br.com.receita.domain.Receita;
 import br.com.receita.repository.ReceitaRepository;
 import br.com.receita.service.ReceitaService;
@@ -50,5 +53,15 @@ public class ReceitaServiceTest {
 		receitaService.salvar(receita);
 		
 		verify(receitaRepository).save(receita);
+	}
+	
+	@Test
+	public void deve_testar_hashcode() {
+		Receita r1 = new Receita(1, TITULO, DESC);
+		Receita r2 = new Receita(1, TITULO, DESC);
+		
+		assertNotSame(r1, r2);
+		assertEquals(r1, r2);
+		assertEquals(r1.hashCode(), r2.hashCode());
 	}
 }
