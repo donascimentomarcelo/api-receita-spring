@@ -15,10 +15,28 @@ public class ReceitaServiceImpl implements ReceitaService {
 	@Autowired
 	private ReceitaRepository receitaRepository;
 	
+	public ReceitaServiceImpl(ReceitaRepository receitaRepository) {
+		this.receitaRepository = receitaRepository;
+	}
+
 	@Override
 	public List<Receita> listar() {
 		List<Receita> lista = receitaRepository.findAll();
 		return lista;
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#salvar(br.com.receita.domain.Receita)
+	 * @param receita
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 22:23:47
+	 */
+	@Override
+	public Receita salvar(Receita receita) {
+		receita = receitaRepository.save(receita);
+		return receita;
 	}
 
 }
