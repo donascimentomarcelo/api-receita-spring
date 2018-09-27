@@ -1,6 +1,7 @@
 package br.com.receita.resource;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -41,5 +42,23 @@ public class ReceitaResourceTest extends ReceitaApplicationTests{
 		.post("/api/v1/receitas")
 		.then()
 			.statusCode(HttpStatus.CREATED.value());
+	}
+	
+	@Test
+	public void deve_pesquisar_receita_por_id () throws Exception {
+		given()
+			.request()
+			.header("Accept", ContentType.ANY)
+			.header("content-type", ContentType.JSON)
+		.get("/api/v1/receitas/1")
+		.then()
+			.log().headers()
+		.and()
+			.log().body()
+		.and()
+		.statusCode(HttpStatus.OK.value())
+		.body("id", equalTo(1))
+		.body("titulo", equalTo(TITULO))
+		.body("descricao", equalTo(DESC));
 	}
 }
