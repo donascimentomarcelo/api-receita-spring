@@ -18,4 +18,15 @@ public interface ReceitaService {
 	 */
 	Receita salvar(Receita receita);
 
+	/**
+	 * @param id
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 26 de set de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc 
+	 */
+	Receita pesquisar(Integer id);
+
 }

@@ -39,4 +39,18 @@ public class ReceitaServiceImpl implements ReceitaService {
 		return receita;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#pesquisar(java.lang.Integer)
+	 * @param id
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 22:51:45
+	 */
+	@Override
+	public Receita pesquisar(Integer id) {
+		Receita receita = receitaRepository.findOne(id);
+		return receita;
+	}
+
 }
