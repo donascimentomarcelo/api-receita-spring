@@ -2,6 +2,8 @@ package br.com.receita.repositoryTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,9 @@ import br.com.receita.repository.ReceitaRepository;
 public class ReceitaRepositoryTest {
 	
 	private static final String TITULO = "Bolo de cenoura";
+	private static final String TITULO1 = "Bolo de Maracuja";
 	private static final String DESC = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+	private static final String DESC1 = "Lorem ipsum dolor sit amet, consectetur adipisicing elit";
 	
 	@Autowired
 	private ReceitaRepository receitaRepository;
@@ -51,5 +55,31 @@ public class ReceitaRepositoryTest {
 		//verificacao
 		assertThat(rec.getTitulo()).isEqualTo(TITULO);
 		assertThat(rec.getDescricao()).isEqualTo(DESC);
+	}
+
+	@Test
+	public void deve_pesquisar_receita_por_id() throws Exception {
+		//cenario
+
+		//acao
+		Receita rec = receitaRepository.findOne(1);
+		
+		//verificacao
+		assertThat(rec.getId()).isEqualTo(1);
+		assertThat(rec.getTitulo()).isEqualTo(TITULO1);
+		assertThat(rec.getDescricao()).isEqualTo(DESC1);
+	}
+
+	@Test
+	public void deve_listar_todas_as_receitas() throws Exception {
+		//cenario
+		
+		//acao
+		List<Receita> listaDeReceitas = receitaRepository.findAll();
+		
+		//verificacao
+		assertThat(listaDeReceitas.get(0).getId()).isEqualTo(1);
+		assertThat(listaDeReceitas.get(0).getTitulo()).isEqualTo(TITULO1);
+		assertThat(listaDeReceitas.get(0).getDescricao()).isEqualTo(DESC1);
 	}
 }
