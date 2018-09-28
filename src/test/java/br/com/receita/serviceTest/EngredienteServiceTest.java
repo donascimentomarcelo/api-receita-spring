@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.receita.domain.Engrediente;
+import br.com.receita.domain.Receita;
 import br.com.receita.domain.enums.Medida;
 import br.com.receita.repository.EngredienteRepository;
 import br.com.receita.repository.filtro.EngredienteFiltro;
@@ -29,7 +30,9 @@ public class EngredienteServiceTest {
 	private static final String DESCRICAO = "Leite";
 	private static final Integer QUANTIDADE = 1;
 	private static final Medida MEDIDA = Medida.LITROS;
-
+	
+	private static final String TITULO = "Bolo de cenoura";
+	private static final String DESC = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 	
 	@MockBean
 	private EngredienteRepository engredienteRepository;
@@ -40,14 +43,22 @@ public class EngredienteServiceTest {
 	@Mock
 	private EngredienteFiltro filtro;
 	
+	private Receita receita;
+	
 	@Before
 	public void setUp() throws Exception {
 		engredienteService = new EngredienteServiceImpl(engredienteRepository);
+		
+		receita = new Receita();
+		
+		receita.setTitulo(TITULO);
+		receita.setDescricao(DESC);
 		
 		engrediente = new Engrediente();
 		engrediente.setDescricao(DESCRICAO);
 		engrediente.setMedida(Medida.LITROS);
 		engrediente.setQuantidade(QUANTIDADE);
+		engrediente.setReceita(receita);
 		
 		filtro = new EngredienteFiltro();
 		filtro.setDescricao(DESCRICAO);
@@ -70,6 +81,17 @@ public class EngredienteServiceTest {
 		when(engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO)).thenReturn(listaDeEngredientes);
 		List<Engrediente> lista = engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
+		assertThat(lista.get(0).getReceita().getTitulo()).isEqualTo(TITULO);
+		assertThat(lista.get(0).getReceita().getDescricao()).isEqualTo(DESC);
+	}
+	
+	@Test
+	public void deve_pesquisar_por_descricao_e_verificar_dados_de_receita() throws Exception {
+		when(engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO)).thenReturn(listaDeEngredientes);
+		List<Engrediente> lista = engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO);
+		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
+		assertThat(lista.get(0).getReceita().getTitulo()).isEqualTo(TITULO);
+		assertThat(lista.get(0).getReceita().getDescricao()).isEqualTo(DESC);
 	}
 	
 	@Test
