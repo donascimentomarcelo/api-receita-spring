@@ -57,8 +57,7 @@ public class EngredienteServiceTest {
 		engrediente = new Engrediente();
 		engrediente.setDescricao(DESCRICAO);
 		engrediente.setMedida(Medida.LITROS);
-		engrediente.setQuantidade(QUANTIDADE);
-		engrediente.setReceita(receita);
+//		engrediente.setReceita(receita);
 		
 		filtro = new EngredienteFiltro();
 		filtro.setDescricao(DESCRICAO);
@@ -81,8 +80,8 @@ public class EngredienteServiceTest {
 		when(engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO)).thenReturn(listaDeEngredientes);
 		List<Engrediente> lista = engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getReceita().getTitulo()).isEqualTo(TITULO);
-		assertThat(lista.get(0).getReceita().getDescricao()).isEqualTo(DESC);
+//		assertThat(lista.get(0).getReceita().getTitulo()).isEqualTo(TITULO);
+//		assertThat(lista.get(0).getReceita().getDescricao()).isEqualTo(DESC);
 	}
 	
 	@Test
@@ -90,8 +89,8 @@ public class EngredienteServiceTest {
 		when(engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO)).thenReturn(listaDeEngredientes);
 		List<Engrediente> lista = engredienteRepository.findByDescricaoIgnoreCase(DESCRICAO);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getReceita().getTitulo()).isEqualTo(TITULO);
-		assertThat(lista.get(0).getReceita().getDescricao()).isEqualTo(DESC);
+//		assertThat(lista.get(0).getReceita().getTitulo()).isEqualTo(TITULO);
+//		assertThat(lista.get(0).getReceita().getDescricao()).isEqualTo(DESC);
 	}
 	
 	@Test
@@ -130,7 +129,6 @@ public class EngredienteServiceTest {
 		//verificacao
 		List<Engrediente> list = engredienteService.filtrar(filtro);
 		assertThat(list.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(list.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 	}
 	
 	/**
@@ -153,7 +151,6 @@ public class EngredienteServiceTest {
 		//verificacao
 		List<Engrediente> list = engredienteService.filtrar(filtro);
 		assertThat(list.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(list.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 
 	}
 	
@@ -177,15 +174,14 @@ public class EngredienteServiceTest {
 		//verificacao
 		List<Engrediente> list = engredienteService.filtrar(filtro);
 		assertThat(list.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(list.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 		assertThat(list.get(0).getMedida()).isEqualTo(MEDIDA);
 
 	}
 	
 	@Test
 	public void deve_testar_hashcode() {
-		Engrediente e1 = new Engrediente(1, DESCRICAO, QUANTIDADE, MEDIDA, null);
-		Engrediente e2 = new Engrediente(1, DESCRICAO, QUANTIDADE, MEDIDA, null);
+		Engrediente e1 = new Engrediente(1, DESCRICAO, MEDIDA);
+		Engrediente e2 = new Engrediente(1, DESCRICAO, MEDIDA);
 		
 		assertNotSame(e1, e2);
 		assertEquals(e1, e2);
