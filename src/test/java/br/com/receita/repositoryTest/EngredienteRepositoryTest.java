@@ -57,7 +57,6 @@ public class EngredienteRepositoryTest {
 		//cenario
 		engrediente = new Engrediente();
 		engrediente.setDescricao(DESCRICAO);
-		engrediente.setQuantidade(QUANTIDADE);
 		engrediente.setMedida(MEDIDA);
 		
 		//acao
@@ -65,7 +64,6 @@ public class EngredienteRepositoryTest {
 		
 		//verificacao
 		assertThat(eng.getDescricao()).isEqualTo(engrediente.getDescricao());
-		assertThat(eng.getQuantidade()).isEqualTo(engrediente.getQuantidade());
 		assertThat(eng.getMedida()).isEqualTo(engrediente.getMedida());
 	}
 	
@@ -89,7 +87,6 @@ public class EngredienteRepositoryTest {
 		// verificacao
 		assertThat(lista.get(0).getId()).isEqualTo(ID);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 		assertThat(lista.get(0).getMedida()).isEqualTo(MEDIDA);
 
 	}
@@ -115,7 +112,6 @@ public class EngredienteRepositoryTest {
 		// verificacao
 		assertThat(lista.get(0).getId()).isEqualTo(ID);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 		assertThat(lista.get(0).getMedida()).isEqualTo(MEDIDA);
 
 	}
@@ -140,7 +136,6 @@ public class EngredienteRepositoryTest {
 		// verificacao
 		assertThat(lista.get(0).getId()).isEqualTo(ID);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 		assertThat(lista.get(0).getMedida()).isEqualTo(MEDIDA);
 
 	}
@@ -165,7 +160,6 @@ public class EngredienteRepositoryTest {
 		// verificacao
 		assertThat(lista.get(0).getId()).isEqualTo(ID);
 		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getQuantidade()).isEqualTo(QUANTIDADE);
 		assertThat(lista.get(0).getMedida()).isEqualTo(MEDIDA);
 
 	}

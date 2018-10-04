@@ -1,10 +1,9 @@
 package br.com.receita.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,9 +21,10 @@ public class Receita implements Serializable{
 	private Integer id;
 	private String titulo;	
 	private String descricao;
+
 	
-	@OneToMany(mappedBy = "receita", cascade=CascadeType.ALL)
-	private List<Engrediente> engredientes = new ArrayList<>();
+	@OneToMany(mappedBy = "id.receita")
+	private Set<ItemReceita> itens = new HashSet<>();
 	
 	public Receita() {
 		super();
@@ -55,13 +55,14 @@ public class Receita implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public List<Engrediente> getEngredientes() {
-		return engredientes;
-	}
-	public void setEngredientes(List<Engrediente> engredientes) {
-		this.engredientes = engredientes;
-	}
 	
+	public Set<ItemReceita> getItens() {
+		return itens;
+	}
+	public void setItens(Set<ItemReceita> itens) {
+		this.itens = itens;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

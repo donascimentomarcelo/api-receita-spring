@@ -29,7 +29,6 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 		Engrediente engrediente = new Engrediente();
 		engrediente.setDescricao("Leite 2");
 		engrediente.setMedida(Medida.LITROS);
-		engrediente.setQuantidade(2);
 		
 		given()
 			.request()
@@ -47,7 +46,6 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 		Engrediente engrediente = new Engrediente();
 		engrediente.setDescricao("Leite 2");
 		engrediente.setMedida(Medida.MILILITROS);
-		engrediente.setQuantidade(2);
 		
 		given()
 			.request()
