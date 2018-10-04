@@ -1,13 +1,16 @@
 package br.com.receita.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,25 +26,32 @@ public class Engrediente implements Serializable{
 	@SequenceGenerator(name = "seqEngrediente", sequenceName = "seq_id_engrediente")
 	private Integer id;
 	private String descricao;
-	private Integer quantidade;
 	private Integer medida;
 	
 	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="id_receita")
-	private Receita receita;
+	@OneToMany(mappedBy = "id.receita")
+	private Set<ItemReceita> itens = new HashSet<>();
 	
 	public Engrediente() {
 		super();
 	}
 
-	public Engrediente(Integer id, String descricao, Integer quantidade, Medida medida, Receita receita) {
+	public Engrediente(Integer id, String descricao, Medida medida) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
-		this.quantidade = quantidade;
 		this.medida = (medida==null) ? null : medida.getCodigo();
-		this.receita = receita;
+	}
+	
+	@JsonIgnore
+	public List<Receita> getReceitas()
+	{
+		List<Receita> lista = new ArrayList<>();
+		for(ItemReceita x: itens)
+		{
+			lista.add(x.getReceita());
+		}
+		return lista;
 	}
 
 	public Integer getId() {
@@ -59,14 +69,6 @@ public class Engrediente implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
 	
 	public Medida getMedida() {
 		return Medida.toEnum(medida);
@@ -76,12 +78,12 @@ public class Engrediente implements Serializable{
 		this.medida = medida.getCodigo();
 	}
 	
-	public Receita getReceita() {
-		return receita;
+	public Set<ItemReceita> getItens() {
+		return itens;
 	}
 
-	public void setReceita(Receita receita) {
-		this.receita = receita;
+	public void setItens(Set<ItemReceita> itens) {
+		this.itens = itens;
 	}
 
 	@Override
