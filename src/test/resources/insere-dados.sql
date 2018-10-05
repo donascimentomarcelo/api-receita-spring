@@ -8,12 +8,12 @@ INSERT INTO endereco (id, bairro, cep, complemento, localidade, logradouro, uf, 
 INSERT INTO receita (id, titulo, descricao)
 	VALUES
 	('1', 'Bolo de Maracuja', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit');
-INSERT INTO engrediente (id, descricao, medida, quantidade, id_receita) 
+INSERT INTO engrediente (id, descricao, medida) 
 	VALUES 
-	('1', 'Leite moça', '3', '2', '1');
-INSERT INTO engrediente (id, descricao, medida, quantidade, id_receita) 
+	('1', 'Leite moça', '3');
+INSERT INTO engrediente (id, descricao, medida) 
 	VALUES	
-	('2', 'Fubá', '4', '3', '1');
-INSERT INTO engrediente (id, descricao, medida, quantidade, id_receita) 
+	('2', 'Fubá', '4');
+INSERT INTO engrediente (id, descricao, medida) 
 	VALUES	
-	('3', 'Leite', '2', '8', '1');
+	('3', 'Leite', '2');
