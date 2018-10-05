@@ -91,55 +91,7 @@ public class EngredienteRepositoryTest {
 
 	}
 
-	/**
-	 * 
-	 * @Author Marcelo Nascimento
-	 * @Date 7 de set de 2018
-	 * @Project receita
-	 * @Package br.com.receita.repositoryTest
-	 * @Desc Pesquisar um engrediente pela descricao, quantidade e retornar de acordo com os parametros
-	 */
-	@Test
-	public void deve_pesquisar_engrediente_por_descricao_e_quantidade_usando_filtro() {
-		// cenario
-		filtro = new EngredienteFiltro();
-		filtro.setDescricao(DESCRICAO);
-		filtro.setQuantidade(QUANTIDADE);
 		
-		// acao
-		List<Engrediente> lista =  engredienteRepository.filtro(filtro);
-		
-		// verificacao
-		assertThat(lista.get(0).getId()).isEqualTo(ID);
-		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getMedida()).isEqualTo(MEDIDA);
-
-	}
-	
-	/**
-	 * 
-	 * @Author Marcelo Nascimento
-	 * @Date 7 de set de 2018
-	 * @Project receita
-	 * @Package br.com.receita.repositoryTest
-	 * @Desc Pesquisar um engrediente pela quantidade e retornar de acordo com os parametros
-	 */
-	@Test
-	public void deve_pesquisar_engrediente_por_quantidade_usando_filtro() {
-		// cenario
-		filtro = new EngredienteFiltro();
-		filtro.setQuantidade(QUANTIDADE);
-		
-		// acao
-		List<Engrediente> lista =  engredienteRepository.filtro(filtro);
-		
-		// verificacao
-		assertThat(lista.get(0).getId()).isEqualTo(ID);
-		assertThat(lista.get(0).getDescricao()).isEqualTo(DESCRICAO);
-		assertThat(lista.get(0).getMedida()).isEqualTo(MEDIDA);
-
-	}
-	
 	/**
 	 * 
 	 * @Author Marcelo Nascimento
