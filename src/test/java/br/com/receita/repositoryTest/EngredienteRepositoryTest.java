@@ -35,7 +35,6 @@ import br.com.receita.repository.filtro.EngredienteFiltro;
 public class EngredienteRepositoryTest {
 	
 	private static final String DESCRICAO = "Leite";
-	private static final Integer QUANTIDADE = 8;
 	private static final Medida MEDIDA = Medida.LITROS;
 	private static final Integer ID = 3;
 	
