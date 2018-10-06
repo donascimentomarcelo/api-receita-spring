@@ -56,4 +56,14 @@ public class ReceitaResource {
 		
 		return ResponseEntity.ok().build();
 	}
+
+	@PutMapping("/desmontar")
+	ResponseEntity<?> desmontarReceita(
+			@RequestBody ItemReceitaDTO itemReceitaDTO) {
+		ItemReceita itemReceita = receitaService.fromDTO(itemReceitaDTO);
+		
+		receitaService.desmontarReceita(itemReceita);
+		
+		return ResponseEntity.ok().build();
+	}
 }

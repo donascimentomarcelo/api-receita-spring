@@ -49,6 +49,20 @@ public class ReceitaServiceImpl implements ReceitaService {
 		receita = receitaRepository.save(receita);
 		return receita;
 	}
+	
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#fromDTO(br.com.receita.dto.ItemReceitaDTO)
+	 * @param itemReceitaDTO
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 20:29:40
+	 */
+	@Override
+	public ItemReceita fromDTO(ItemReceitaDTO dto) {
+		ItemReceita itemReceita = new ItemReceita(dto.getReceita(), dto.getEngrediente(), dto.getQuantidade());
+		return itemReceita;
+	}
 
 	/* (non-Javadoc)
 	 * @see br.com.receita.service.ReceitaService#pesquisar(java.lang.Integer)
@@ -74,29 +88,23 @@ public class ReceitaServiceImpl implements ReceitaService {
 	 */
 	@Override
 	public void montarReceita(ItemReceita itemReceita) {
-
-		Receita receita = itemReceita.getReceita();
-		Engrediente engrediente = itemReceita.getEngrediente();
-		Integer qtdd = itemReceita.getQuantidade();
 		
-		ItemReceita item =  new ItemReceita(receita, engrediente, qtdd);
-		receita.getItens().add(itemReceita);
-		
-		itemReceitaRepository.save(item);
+		itemReceitaRepository.save(itemReceita);
 	}
 
+
+
 	/* (non-Javadoc)
-	 * @see br.com.receita.service.ReceitaService#fromDTO(br.com.receita.dto.ItemReceitaDTO)
-	 * @param itemReceitaDTO
-	 * @return
+	 * @see br.com.receita.service.ReceitaService#desmontarReceita(br.com.receita.domain.ItemReceita)
+	 * @param itemReceita
 	 * @Project receita
 	 * @Author Marcelo Nascimento
-	 * @Date 20:29:40
+	 * @Date 20:44:24
 	 */
 	@Override
-	public ItemReceita fromDTO(ItemReceitaDTO dto) {
-		ItemReceita itemReceita = new ItemReceita(dto.getReceita(), dto.getEngrediente(), dto.getQuantidade());
-		return itemReceita;
+	public void desmontarReceita(ItemReceita itemReceita) {
+		
+		itemReceitaRepository.delete(itemReceita);
 	}
 
 }

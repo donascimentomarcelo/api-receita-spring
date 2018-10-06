@@ -30,7 +30,18 @@ public interface ReceitaService {
 	 * @Desc 
 	 */
 	Receita pesquisar(Integer id);
-
+	
+	/**
+	 * @param itemReceitaDTO
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 6 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Transforma objeto dto de item receita em objeto real.
+	 */
+	ItemReceita fromDTO(ItemReceitaDTO itemReceitaDTO);
+	
 	/**
 	 * @param idIngreceita
 	 * @param idReceita
@@ -43,14 +54,13 @@ public interface ReceitaService {
 	void montarReceita(ItemReceita itemReceita);
 
 	/**
-	 * @param itemReceitaDTO
-	 * @return
+	 * @param itemReceita
 	 * @Author Marcelo Nascimento
 	 * @Date 6 de out de 2018
 	 * @Project receita
 	 * @Package br.com.receita.service
-	 * @Desc Transforma objeto dto de item receita em objeto real.
+	 * @Desc Remove da receita o ingrediente enviado.
 	 */
-	ItemReceita fromDTO(ItemReceitaDTO itemReceitaDTO);
+	void desmontarReceita(ItemReceita itemReceita);
 
 }
