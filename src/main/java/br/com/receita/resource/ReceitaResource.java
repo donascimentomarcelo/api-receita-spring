@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.dto.ItemReceitaDTO;
+import br.com.receita.repository.filtro.ReceitaFiltro;
 import br.com.receita.service.ReceitaService;
 
 @RestController
@@ -65,5 +66,11 @@ public class ReceitaResource {
 		receitaService.desmontarReceita(itemReceita);
 		
 		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping("/filtrar")
+	ResponseEntity<List<Receita>> filtrar(@RequestBody ReceitaFiltro filtro) {
+		List<Receita> list = receitaService.filtro(filtro);
+		return ResponseEntity.ok(list);
 	}
 }

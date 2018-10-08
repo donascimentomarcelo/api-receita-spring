@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.receita.domain.Engrediente;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.dto.ItemReceitaDTO;
-import br.com.receita.repository.EngredienteRepository;
 import br.com.receita.repository.ItemReceitaRepository;
 import br.com.receita.repository.ReceitaRepository;
+import br.com.receita.repository.filtro.ReceitaFiltro;
 import br.com.receita.service.ReceitaService;
 
 @Service
@@ -19,9 +18,6 @@ public class ReceitaServiceImpl implements ReceitaService {
 
 	@Autowired
 	private ReceitaRepository receitaRepository;
-	
-	@Autowired
-	private EngredienteRepository engredienteRepository;  
 	
 	@Autowired
 	private ItemReceitaRepository itemReceitaRepository;
@@ -105,6 +101,20 @@ public class ReceitaServiceImpl implements ReceitaService {
 	public void desmontarReceita(ItemReceita itemReceita) {
 		
 		itemReceitaRepository.delete(itemReceita);
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#filtro(br.com.receita.repository.filtro.ReceitaFiltro)
+	 * @param filtro
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 12:11:27
+	 */
+	@Override
+	public List<Receita> filtro(ReceitaFiltro filtro) {
+		List<Receita> lista = receitaRepository.filtro(filtro);
+		return lista;
 	}
 
 }

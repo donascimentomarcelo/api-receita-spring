@@ -2,8 +2,6 @@ package br.com.receita.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.receita.domain.Engrediente;

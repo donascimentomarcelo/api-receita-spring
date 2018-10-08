@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.dto.ItemReceitaDTO;
+import br.com.receita.repository.filtro.ReceitaFiltro;
 
 public interface ReceitaService {
 
@@ -62,5 +63,16 @@ public interface ReceitaService {
 	 * @Desc Remove da receita o ingrediente enviado.
 	 */
 	void desmontarReceita(ItemReceita itemReceita);
+
+	/**
+	 * @param filtro
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 7 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Realiza a filtragem dos dados de receita com base nos atributos informados.
+	 */
+	List<Receita> filtro(ReceitaFiltro filtro);
 
 }
