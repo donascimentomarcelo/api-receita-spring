@@ -73,17 +73,14 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 			.statusCode(HttpStatus.OK.value())
 			.body("id[0]", equalTo(1))
 			.body("descricao[0]", equalTo("Leite moça"))
-			.body("quantidade[0]", equalTo(2))
 			.body("medida[0]", equalTo("GRAMAS"))
 			
 			.body("id[1]", equalTo(2))
 			.body("descricao[1]", equalTo("Fubá"))
-			.body("quantidade[1]", equalTo(3))
 			.body("medida[1]", equalTo("QUILOS"))
 			
 			.body("id[2]", equalTo(3))
 			.body("descricao[2]", equalTo("Leite"))
-			.body("quantidade[2]", equalTo(8))
 			.body("medida[2]", equalTo("LITROS"));
 	}
 	
@@ -102,7 +99,6 @@ public class EngredienteResourceTest extends ReceitaApplicationTests{
 		.statusCode(HttpStatus.OK.value())
 		.body("id", equalTo(1))
 		.body("descricao", equalTo("Leite moça"))
-		.body("quantidade", equalTo(2))
 		.body("medida", equalTo("GRAMAS"));
 	}
 

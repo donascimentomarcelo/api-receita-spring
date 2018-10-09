@@ -24,8 +24,8 @@ import io.restassured.http.ContentType;
 @Sql(value = "/limpar-dados.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class ReceitaResourceTest extends ReceitaApplicationTests{
 
-	private static final String TITULO = "Bolo de cenoura";
-	private static final String DESC = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+	private static final String TITULO = "Bolo de Maracuja";
+	private static final String DESC = "Lorem ipsum dolor sit amet, consectetur adipisicing elit";
 	
 	@Test
 	public void deve_salvar_receita () throws Exception {
