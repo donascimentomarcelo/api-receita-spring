@@ -180,8 +180,8 @@ public class EngredienteServiceTest {
 	
 	@Test
 	public void deve_testar_hashcode() {
-		Engrediente e1 = new Engrediente(1, DESCRICAO, MEDIDA);
-		Engrediente e2 = new Engrediente(1, DESCRICAO, MEDIDA);
+		Engrediente e1 = new Engrediente(1, DESCRICAO, MEDIDA, null);
+		Engrediente e2 = new Engrediente(1, DESCRICAO, MEDIDA, null);
 		
 		assertNotSame(e1, e2);
 		assertEquals(e1, e2);
