@@ -1,16 +1,13 @@
 package br.com.receita.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.receita.domain.Endereco;
 import br.com.receita.domain.Usuario;
 import br.com.receita.repository.EnderecoRepository;
-import br.com.receita.repository.UsuarioRepository;
 import br.com.receita.service.EnderecoService;
-import br.com.receita.service.exception.ObjetoNaoEncontradoException;
+import br.com.receita.service.UsuarioService;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService{
@@ -19,7 +16,7 @@ public class EnderecoServiceImpl implements EnderecoService{
 	private EnderecoRepository enderecoRepository;
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioService usuarioService;
 
 	public EnderecoServiceImpl(EnderecoRepository enderecoRepository) {
 		this.enderecoRepository = enderecoRepository;
@@ -28,7 +25,7 @@ public class EnderecoServiceImpl implements EnderecoService{
 	@Override
 	public Endereco addEndereco(Endereco endereco) {
 		try {
-			Usuario usr = pesquisaUsuarioLogado();
+			Usuario usr = usuarioService.pesquisaUsuarioLogado();
 			endereco.setId(null);
 			endereco.setUsuario(usr);
 		} catch (Exception e) {
@@ -49,15 +46,6 @@ public class EnderecoServiceImpl implements EnderecoService{
 	public Endereco salvar(Endereco endereco) {
 		endereco = enderecoRepository.save(endereco);
 		return endereco;
-	}
-	
-
-	public Usuario pesquisaUsuarioLogado() throws Exception {
-		//Criar uma classe generica para retornar usuario logado
-		//Apos implementar jwt, retornar id do usuario logado
-		Optional<Usuario> optional = usuarioRepository.findById(1);
-		
-		return optional.orElseThrow(() -> new ObjetoNaoEncontradoException("Usuario não encontrado"));
 	}
 	
 }

@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.receita.domain.Endereco;
 import br.com.receita.domain.Engrediente;
+import br.com.receita.domain.Grupo;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.domain.Usuario;
 import br.com.receita.domain.enums.Medida;
 import br.com.receita.repository.EnderecoRepository;
 import br.com.receita.repository.EngredienteRepository;
+import br.com.receita.repository.GrupoRepository;
 import br.com.receita.repository.ItemReceitaRepository;
 import br.com.receita.repository.ReceitaRepository;
 import br.com.receita.repository.UsuarioRepository;
@@ -36,6 +38,9 @@ public class Instanciacao implements CommandLineRunner{
 	@Autowired
 	private ItemReceitaRepository itemReceitaRepository;
 	
+	@Autowired
+	private GrupoRepository grupoRepository;
+	
 	@Override
 	public void run(String... arg0) throws Exception {
 		
@@ -49,18 +54,24 @@ public class Instanciacao implements CommandLineRunner{
 		
 		enderecoRepository.save(endereco);
 		
-		Receita receita1 = new Receita(null, "Bolo de Fubá", "Bolo de Fubá desc");
-		Receita receita2 = new Receita(null, "Bolo de Cenoura", "Bolo de Cenoura desc");
-		Receita receita3 = new Receita(null, "Bolo de Morango", "Bolo de Morango desc");
+		Receita receita1 = new Receita(null, "Bolo de Fubá", "Bolo de Fubá desc", usuario);
+		Receita receita2 = new Receita(null, "Bolo de Cenoura", "Bolo de Cenoura desc", usuario);
+		Receita receita3 = new Receita(null, "Bolo de Morango", "Bolo de Morango desc", usuario);
 		
-		Engrediente engrediente1 =  new Engrediente(null, "Leite moça", Medida.LITROS);
-		Engrediente engrediente2 =  new Engrediente(null, "Fubá", Medida.GRAMAS);
-		Engrediente engrediente3 =  new Engrediente(null, "Leite", Medida.GRAMAS);
-		Engrediente engrediente4 =  new Engrediente(null, "Morango", Medida.GRAMAS);
-		Engrediente engrediente5 =  new Engrediente(null, "Cenoura", Medida.GRAMAS);
-		Engrediente engrediente6 =  new Engrediente(null, "Creme de leite", Medida.GRAMAS);
-		Engrediente engrediente7 =  new Engrediente(null, "Fermento", Medida.GRAMAS);
-	
+		Grupo grupo1 = new Grupo(null, "Doces");
+		
+		Engrediente engrediente1 =  new Engrediente(null, "Leite moça", Medida.LITROS, grupo1);
+		Engrediente engrediente2 =  new Engrediente(null, "Fubá", Medida.GRAMAS, grupo1);
+		Engrediente engrediente3 =  new Engrediente(null, "Leite", Medida.GRAMAS, grupo1);
+		Engrediente engrediente4 =  new Engrediente(null, "Morango", Medida.GRAMAS, grupo1);
+		Engrediente engrediente5 =  new Engrediente(null, "Cenoura", Medida.GRAMAS, grupo1);
+		Engrediente engrediente6 =  new Engrediente(null, "Creme de leite", Medida.GRAMAS, grupo1);
+		Engrediente engrediente7 =  new Engrediente(null, "Fermento", Medida.GRAMAS, grupo1);
+		
+		grupo1.getEngrediente().addAll(Arrays.asList(engrediente1, engrediente2, engrediente3, engrediente4, engrediente5, engrediente6, engrediente7));
+		
+		grupoRepository.save(grupo1);
+		
 		receitaRepository.save(Arrays.asList(receita1, receita2, receita3));
 		
 		engredienteRepository.save(Arrays.asList(engrediente1, engrediente2, engrediente3, engrediente4, engrediente5, engrediente6, engrediente7));

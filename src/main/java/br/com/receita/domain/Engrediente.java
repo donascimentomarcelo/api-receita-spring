@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -32,15 +34,21 @@ public class Engrediente implements Serializable{
 	@OneToMany(mappedBy = "id.receita")
 	private Set<ItemReceita> itens = new HashSet<>();
 	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name="grupo_id")
+	private Grupo grupo;
+	
 	public Engrediente() {
 		super();
 	}
 
-	public Engrediente(Integer id, String descricao, Medida medida) {
+	public Engrediente(Integer id, String descricao, Medida medida, Grupo grupo) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.medida = (medida==null) ? null : medida.getCodigo();
+		this.grupo = grupo;
 	}
 	
 	@JsonIgnore

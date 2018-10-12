@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
+import br.com.receita.domain.Usuario;
 import br.com.receita.dto.ItemReceitaDTO;
 import br.com.receita.repository.ItemReceitaRepository;
 import br.com.receita.repository.ReceitaRepository;
 import br.com.receita.repository.filtro.ReceitaFiltro;
 import br.com.receita.service.ReceitaService;
+import br.com.receita.service.UsuarioService;
 
 @Service
 public class ReceitaServiceImpl implements ReceitaService {
@@ -21,6 +23,9 @@ public class ReceitaServiceImpl implements ReceitaService {
 	
 	@Autowired
 	private ItemReceitaRepository itemReceitaRepository;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	public ReceitaServiceImpl(ReceitaRepository receitaRepository) {
 		this.receitaRepository = receitaRepository;
@@ -41,7 +46,9 @@ public class ReceitaServiceImpl implements ReceitaService {
 	 * @Date 22:23:47
 	 */
 	@Override
-	public Receita salvar(Receita receita) {
+	public Receita salvar(Receita receita) throws Exception {
+		Usuario usuario = usuarioService.pesquisaUsuarioLogado();
+		receita.setUsuario(usuario);
 		receita = receitaRepository.save(receita);
 		return receita;
 	}
@@ -114,6 +121,20 @@ public class ReceitaServiceImpl implements ReceitaService {
 	@Override
 	public List<Receita> filtro(ReceitaFiltro filtro) {
 		List<Receita> lista = receitaRepository.filtro(filtro);
+		return lista;
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#minhasReceitas()
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 00:07:43
+	 */
+	@Override
+	public List<Receita> minhasReceitas() throws Exception {
+		Usuario usuario = usuarioService.pesquisaUsuarioLogado();
+		List<Receita> lista = receitaRepository.listarMinhasReceitas(usuario.getId());
 		return lista;
 	}
 

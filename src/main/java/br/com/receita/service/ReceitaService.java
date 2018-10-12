@@ -13,13 +13,14 @@ public interface ReceitaService {
 
 	/**
 	 * @param receita
+	 * @throws Exception 
 	 * @Author Marcelo Nascimento
 	 * @Date 25 de set de 2018
 	 * @Project receita
 	 * @Package br.com.receita.service
 	 * @Desc Método para salvar receita
 	 */
-	Receita salvar(Receita receita);
+	Receita salvar(Receita receita) throws Exception;
 
 	/**
 	 * @param id
@@ -74,5 +75,16 @@ public interface ReceitaService {
 	 * @Desc Realiza a filtragem dos dados de receita com base nos atributos informados.
 	 */
 	List<Receita> filtro(ReceitaFiltro filtro);
+
+	/**
+	 * @return
+	 * @throws Exception 
+	 * @Author Marcelo Nascimento
+	 * @Date 12 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Lista todas as receitas do usuário logado.
+	 */
+	List<Receita> minhasReceitas() throws Exception;
 
 }
