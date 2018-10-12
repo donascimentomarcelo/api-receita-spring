@@ -40,7 +40,7 @@ public class ReceitaResource {
 	}
 	
 	@PostMapping
-	ResponseEntity<?> salvar(@RequestBody Receita receita) {
+	ResponseEntity<?> salvar(@RequestBody Receita receita) throws Exception {
 		receita = receitaService.salvar(receita);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -72,5 +72,11 @@ public class ReceitaResource {
 	ResponseEntity<List<Receita>> filtrar(@RequestBody ReceitaFiltro filtro) {
 		List<Receita> list = receitaService.filtro(filtro);
 		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/minhas-receitas") 
+	ResponseEntity<List<Receita>> minhasReceitas() throws Exception {
+		List<Receita> lista = receitaService.minhasReceitas();
+		return ResponseEntity.ok(lista);
 	}
 }
