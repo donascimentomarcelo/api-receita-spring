@@ -87,5 +87,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return optional.orElseThrow(() -> new ObjetoNaoEncontradoException("Usuario não encontrado"));
 	}
 
+	@Override
+	public Usuario pesquisaUsuarioLogado() throws Exception {
+		//Criar uma classe generica para retornar usuario logado
+		//Apos implementar jwt, retornar id do usuario logado
+		Optional<Usuario> optional = usuarioRepository.findById(50);
+		
+		return optional.orElseThrow(() -> new ObjetoNaoEncontradoException("Usuario não encontrado"));
+	}
 
 }

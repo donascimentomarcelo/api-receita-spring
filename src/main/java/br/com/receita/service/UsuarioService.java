@@ -26,5 +26,7 @@ public interface UsuarioService {
 	 * @return
 	 */
 	Usuario verificaSeEmailExiste(String email) throws ObjetoNaoEncontradoException;
+	
+	Usuario pesquisaUsuarioLogado() throws Exception;
 
 }
