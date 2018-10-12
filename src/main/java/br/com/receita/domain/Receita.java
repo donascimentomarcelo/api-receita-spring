@@ -8,8 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Receita implements Serializable{
@@ -21,6 +25,11 @@ public class Receita implements Serializable{
 	private Integer id;
 	private String titulo;	
 	private String descricao;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 
 	
 	@OneToMany(mappedBy = "id.receita")
@@ -30,11 +39,12 @@ public class Receita implements Serializable{
 		super();
 	}
 	
-	public Receita(Integer id, String titulo, String descricao) {
+	public Receita(Integer id, String titulo, String descricao, Usuario usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
+		this.usuario = usuario;
 	}
 	
 	public Integer getId() {
@@ -61,6 +71,14 @@ public class Receita implements Serializable{
 	}
 	public void setItens(Set<ItemReceita> itens) {
 		this.itens = itens;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

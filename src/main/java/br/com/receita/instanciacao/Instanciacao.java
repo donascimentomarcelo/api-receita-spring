@@ -54,9 +54,9 @@ public class Instanciacao implements CommandLineRunner{
 		
 		enderecoRepository.save(endereco);
 		
-		Receita receita1 = new Receita(null, "Bolo de Fubá", "Bolo de Fubá desc");
-		Receita receita2 = new Receita(null, "Bolo de Cenoura", "Bolo de Cenoura desc");
-		Receita receita3 = new Receita(null, "Bolo de Morango", "Bolo de Morango desc");
+		Receita receita1 = new Receita(null, "Bolo de Fubá", "Bolo de Fubá desc", usuario);
+		Receita receita2 = new Receita(null, "Bolo de Cenoura", "Bolo de Cenoura desc", usuario);
+		Receita receita3 = new Receita(null, "Bolo de Morango", "Bolo de Morango desc", usuario);
 		
 		Grupo grupo1 = new Grupo(null, "Doces");
 		
