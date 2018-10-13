@@ -22,7 +22,29 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer>, Rece
 	 * @Package br.com.receita.repository
 	 * @Desc Query JPQL que lista as receitas dos usuarios logados.
 	 */
-	@Query("SELECT bean FROM Receita bean WHERE bean.usuario.id = :usuario_id ORDER BY bean.id")
-	List<Receita> listarMinhasReceitas(@Param("usuario_id")Integer id);
+	@Query("SELECT bean FROM Receita bean "
+			+ "LEFT JOIN bean.itens i "
+			+ "WHERE bean.usuario.id = :usuario_id "
+			+ "AND i IS NOT NULL "
+			+ "GROUP BY bean "
+			+ "ORDER BY bean.id")
+	List<Receita> listarMinhasReceitasCompletas(@Param("usuario_id")Integer id);
+
+	/**
+	 * @param id
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 12 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.repository
+	 * @Desc 
+	 */
+	@Query("SELECT bean FROM Receita bean "
+			+ "LEFT JOIN bean.itens i "
+			+ "WHERE bean.usuario.id = :usuario_id "
+			+ "AND i IS NULL "
+			+ "GROUP BY bean "
+			+ "ORDER BY bean.id")
+	List<Receita> listarMinhasReceitasIncompletas(@Param("usuario_id")Integer id);
 
 }

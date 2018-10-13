@@ -132,9 +132,24 @@ public class ReceitaServiceImpl implements ReceitaService {
 	 * @Date 00:07:43
 	 */
 	@Override
-	public List<Receita> minhasReceitas() throws Exception {
+	public List<Receita> minhasReceitasCompletas() throws Exception {
 		Usuario usuario = usuarioService.pesquisaUsuarioLogado();
-		List<Receita> lista = receitaRepository.listarMinhasReceitas(usuario.getId());
+		List<Receita> lista = receitaRepository.listarMinhasReceitasCompletas(usuario.getId());
+		return lista;
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#minhasReceitasIncompletas()
+	 * @return
+	 * @throws Exception
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 16:27:20
+	 */
+	@Override
+	public List<Receita> minhasReceitasIncompletas() throws Exception {
+		Usuario usuario = usuarioService.pesquisaUsuarioLogado();
+		List<Receita> lista = receitaRepository.listarMinhasReceitasIncompletas(usuario.getId());
 		return lista;
 	}
 
