@@ -1,7 +1,9 @@
 package br.com.receita.resource;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -74,9 +76,16 @@ public class ReceitaResource {
 		return ResponseEntity.ok(list);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping("/minhas-receitas") 
-	ResponseEntity<List<Receita>> minhasReceitas() throws Exception {
-		List<Receita> lista = receitaService.minhasReceitas();
-		return ResponseEntity.ok(lista);
+	ResponseEntity<Map<String, List<Receita>>> minhasReceitas() throws Exception {
+		List<Receita> receitasCompletas = receitaService.minhasReceitasCompletas();
+		List<Receita> receitasIncompletas = receitaService.minhasReceitasIncompletas();
+		
+		@SuppressWarnings("rawtypes")
+		Map<String, List<Receita>> map = new HashMap();
+		map.put("completas", receitasCompletas);
+		map.put("incompletas", receitasIncompletas);
+		return ResponseEntity.ok(map);
 	}
 }

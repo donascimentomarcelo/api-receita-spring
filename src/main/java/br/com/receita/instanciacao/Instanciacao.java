@@ -57,6 +57,7 @@ public class Instanciacao implements CommandLineRunner{
 		Receita receita1 = new Receita(null, "Bolo de Fubá", "Bolo de Fubá desc", usuario);
 		Receita receita2 = new Receita(null, "Bolo de Cenoura", "Bolo de Cenoura desc", usuario);
 		Receita receita3 = new Receita(null, "Bolo de Morango", "Bolo de Morango desc", usuario);
+		Receita receita4 = new Receita(null, "Bolo Doce", "Bolo Doce desc", usuario);
 		
 		Grupo grupo1 = new Grupo(null, "Doces");
 		
@@ -72,7 +73,7 @@ public class Instanciacao implements CommandLineRunner{
 		
 		grupoRepository.save(grupo1);
 		
-		receitaRepository.save(Arrays.asList(receita1, receita2, receita3));
+		receitaRepository.save(Arrays.asList(receita1, receita2, receita3, receita4));
 		
 		engredienteRepository.save(Arrays.asList(engrediente1, engrediente2, engrediente3, engrediente4, engrediente5, engrediente6, engrediente7));
 		

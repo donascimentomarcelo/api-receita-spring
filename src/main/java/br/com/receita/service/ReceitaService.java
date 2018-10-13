@@ -83,8 +83,18 @@ public interface ReceitaService {
 	 * @Date 12 de out de 2018
 	 * @Project receita
 	 * @Package br.com.receita.service
-	 * @Desc Lista todas as receitas do usuário logado.
+	 * @Desc Lista todas as receitas completas do usuário logado.
 	 */
-	List<Receita> minhasReceitas() throws Exception;
+	List<Receita> minhasReceitasCompletas() throws Exception;
+
+	/**
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 12 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Lista todas as receitas incompletas do usuário logado.
+	 */
+	List<Receita> minhasReceitasIncompletas() throws Exception;
 
 }
