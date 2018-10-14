@@ -153,4 +153,21 @@ public class ReceitaServiceImpl implements ReceitaService {
 		return lista;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#atualizar(br.com.receita.domain.Receita, java.lang.Integer)
+	 * @param receita
+	 * @param id
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 22:15:33
+	 */
+	@Override
+	public void atualizar(Receita receita, Integer id) {
+		Receita rec = pesquisar(id);
+		rec.setId(id);
+		rec.setDescricao(receita.getDescricao());
+		rec.setTitulo(receita.getTitulo());
+		receitaRepository.save(receita);
+	}
+
 }
