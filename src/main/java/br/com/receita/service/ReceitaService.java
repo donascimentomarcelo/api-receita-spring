@@ -97,4 +97,15 @@ public interface ReceitaService {
 	 */
 	List<Receita> minhasReceitasIncompletas() throws Exception;
 
+	/**
+	 * @param receita
+	 * @param id
+	 * @Author Marcelo Nascimento
+	 * @Date 13 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Atualiza os dados da receita.
+	 */
+	void atualizar(Receita receita, Integer id);
+
 }

@@ -88,4 +88,10 @@ public class ReceitaResource {
 		map.put("incompletas", receitasIncompletas);
 		return ResponseEntity.ok(map);
 	}
+	
+	@PutMapping("/{id}")
+	ResponseEntity<?> atualizar(@RequestBody Receita receita, @PathVariable Integer id) {
+		receitaService.atualizar(receita, id);
+		return ResponseEntity.noContent().build();
+	}
 }
