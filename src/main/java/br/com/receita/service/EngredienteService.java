@@ -46,4 +46,15 @@ public interface EngredienteService {
 	 */
 	Engrediente pesquisar(Integer id);
 
+	/**
+	 * @param id_grupo
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 16 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Retorna uma lista de ingredientes filtrados pelo grupo;
+	 */
+	List<Engrediente> listarIngredientePorGrupo(Integer id_grupo);
+
 }
