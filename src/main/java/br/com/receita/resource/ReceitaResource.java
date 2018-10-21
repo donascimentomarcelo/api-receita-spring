@@ -1,6 +1,7 @@
 package br.com.receita.resource;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.dto.ItemReceitaDTO;
+import br.com.receita.dto.TagDTO;
 import br.com.receita.repository.filtro.ReceitaFiltro;
 import br.com.receita.service.ReceitaService;
 
@@ -93,5 +95,11 @@ public class ReceitaResource {
 	ResponseEntity<?> atualizar(@RequestBody Receita receita, @PathVariable Integer id) {
 		receitaService.atualizar(receita, id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping("/pesquisar-receitas")
+	ResponseEntity<?> pesquisarReceitas(@RequestBody Collection<TagDTO> tags) {
+		List<Receita>lista = receitaService.pesquisarReceitas(tags);
+		return ResponseEntity.ok(lista);
 	}
 }

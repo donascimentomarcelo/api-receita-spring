@@ -78,4 +78,18 @@ public class EngredienteServiceImpl implements EngredienteService{
 		return engrediente;
 	}
 
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.EngredienteService#listarIngredientePorGrupo(java.lang.Integer)
+	 * @param id_grupo
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 20:17:30
+	 */
+	@Override
+	public List<Engrediente> listarIngredientePorGrupo(Integer grupo_id) {
+		List<Engrediente> lista = engredienteRepository.listarIngredientePorGrupo(grupo_id);
+		return lista;
+	}
+
 }

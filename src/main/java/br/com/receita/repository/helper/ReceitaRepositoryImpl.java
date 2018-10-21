@@ -1,5 +1,6 @@
 package br.com.receita.repository.helper;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.persistence.Query;
 import org.springframework.util.StringUtils;
 
 import br.com.receita.domain.Receita;
+import br.com.receita.dto.TagDTO;
 import br.com.receita.repository.filtro.ReceitaFiltro;
 
 /**
@@ -100,6 +102,42 @@ public class ReceitaRepositoryImpl implements ReceitaQueriesRepository{
 			builder.append(" and lower(descricao) LIKE lower('%'||:descricao||'%')");
 			params.put("descricao", filtro.getDescricao());
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.repository.helper.ReceitaQueriesRepository#pesquisarReceitas(java.util.Collection)
+	 * @param tags
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 22:28:41
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Receita> pesquisarReceitas(Collection<TagDTO> tags) {
+		final StringBuilder builder = new StringBuilder();
+		final Map<String, Object> params = new HashMap<>();
+		
+		builder.append("SELECT bean FROM ItemReceita itens "
+				+ "INNER JOIN itens.id.receita bean "
+				+ "INNER JOIN itens.id.engrediente ingrediente "
+				+ "WHERE 1 = 1 ");
+		
+		if(tags.size() > 0) {
+			for(TagDTO tag: tags) {
+				builder.append("and LOWER(ingrediente.descricao) like LOWER('%' || :descricao || '%')");
+				params.put("descricao", tag.getValor());
+			}
+		}
+		
+		Query query = manager.createQuery(builder.toString(), Receita.class);
+		
+		for(Map.Entry<String, Object> param: params.entrySet()) {
+			query.setParameter(param.getKey(), param.getValue());
+		}
+		
+		
+		return query.getResultList();
 	}
 
 }

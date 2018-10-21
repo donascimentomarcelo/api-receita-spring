@@ -53,4 +53,10 @@ public class EngredienteResource {
 		Engrediente engrediente = engredienteService.pesquisar(id);
 		return ResponseEntity.ok(engrediente);
 	}
+	
+	@GetMapping("{grupo_id}/grupo")
+	ResponseEntity<List<Engrediente>> listarIngredientePorGrupo(@PathVariable Integer grupo_id) {
+		List<Engrediente> lista = engredienteService.listarIngredientePorGrupo(grupo_id);
+		return ResponseEntity.ok(lista);
+	}
 }

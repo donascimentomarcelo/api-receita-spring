@@ -1,5 +1,6 @@
 package br.com.receita.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.domain.Usuario;
 import br.com.receita.dto.ItemReceitaDTO;
+import br.com.receita.dto.TagDTO;
 import br.com.receita.repository.ItemReceitaRepository;
 import br.com.receita.repository.ReceitaRepository;
 import br.com.receita.repository.filtro.ReceitaFiltro;
@@ -168,6 +170,19 @@ public class ReceitaServiceImpl implements ReceitaService {
 		rec.setDescricao(receita.getDescricao());
 		rec.setTitulo(receita.getTitulo());
 		receitaRepository.save(receita);
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ReceitaService#pesquisarReceitas(java.util.Collection)
+	 * @param tags
+	 * @return
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 22:21:40
+	 */
+	@Override
+	public List<Receita> pesquisarReceitas(Collection<TagDTO> tags) {
+		return receitaRepository.pesquisarReceitas(tags);
 	}
 
 }
