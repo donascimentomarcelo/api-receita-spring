@@ -125,7 +125,7 @@ public class ReceitaRepositoryImpl implements ReceitaQueriesRepository{
 		
 		if(tags.size() > 0) {
 			for(TagDTO tag: tags) {
-				builder.append("and LOWER(ingrediente.descricao) like LOWER('%' || :descricao || '%')");
+				builder.append("and LOWER(ingrediente.descricao) = LOWER(:descricao)");
 				params.put("descricao", tag.getValor());
 			}
 		}
