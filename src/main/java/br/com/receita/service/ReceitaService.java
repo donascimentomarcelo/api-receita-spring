@@ -1,10 +1,12 @@
 package br.com.receita.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.dto.ItemReceitaDTO;
+import br.com.receita.dto.TagDTO;
 import br.com.receita.repository.filtro.ReceitaFiltro;
 
 public interface ReceitaService {
@@ -107,5 +109,16 @@ public interface ReceitaService {
 	 * @Desc Atualiza os dados da receita.
 	 */
 	void atualizar(Receita receita, Integer id);
+
+	/**
+	 * @param tags
+	 * @return
+	 * @Author Marcelo Nascimento
+	 * @Date 20 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Metodo responsavel por filtrar as receitas pelas tags.
+	 */
+	List<Receita> pesquisarReceitas(Collection<TagDTO> tags);
 
 }

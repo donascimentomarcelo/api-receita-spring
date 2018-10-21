@@ -1,8 +1,10 @@
 package br.com.receita.repository.helper;
 
+import java.util.Collection;
 import java.util.List;
 
 import br.com.receita.domain.Receita;
+import br.com.receita.dto.TagDTO;
 import br.com.receita.repository.filtro.ReceitaFiltro;
 
 /**
@@ -15,4 +17,6 @@ import br.com.receita.repository.filtro.ReceitaFiltro;
 public interface ReceitaQueriesRepository {
 
 	List<Receita> filtro(ReceitaFiltro filtro);
+	
+	List<Receita> pesquisarReceitas(Collection<TagDTO> tags);
 }
