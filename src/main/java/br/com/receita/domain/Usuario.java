@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario implements Serializable{
@@ -30,6 +33,9 @@ public class Usuario implements Serializable{
 	
 	@OneToMany(mappedBy = "usuario", cascade=CascadeType.ALL)
 	private List<Receita> receita = new ArrayList<>();
+	
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
+	private List<Avaliacao> avaliacao = new ArrayList<>();
 	
 	public Usuario() {
 		super();
@@ -89,6 +95,14 @@ public class Usuario implements Serializable{
 
 	public void setReceita(List<Receita> receita) {
 		this.receita = receita;
+	}
+	
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	@Override
