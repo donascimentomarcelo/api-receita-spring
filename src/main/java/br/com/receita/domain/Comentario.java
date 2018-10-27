@@ -2,83 +2,74 @@ package br.com.receita.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.receita.domain.enums.Grau;
-
 /**
  * @Author Marcelo Nascimento
- * @Date 25 de out de 2018
+ * @Date 26 de out de 2018
  * @Project receita
  * @Package br.com.receita.domain
- * @Desc Entidade que define os níveis de aprovação da receita pelo usuário.
+ * @Desc 
  */
 @Entity
-public class Avaliacao implements Serializable {
-
+public class Comentario implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seqAvaliacao")
-	@SequenceGenerator(name = "seqAvaliacao", sequenceName = "seq_id_avaliacao")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seqComentario")
+	@SequenceGenerator(name = "seqComentario", sequenceName = "seq_id_comentario")
 	private Integer id;
-	private Integer grau;
+	private String comentario;
 	
-	@ManyToOne
+	@OneToOne
+	@JoinColumn(name="avaliacao_id")
 	@JsonIgnore
-	@JoinColumn(name="usuario_id")
-	private Usuario usuario;
+	private Avaliacao avaliacao;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="avaliacao")
-	private Comentario comentario;
-	
-	public Avaliacao() {
+	public Comentario() {
 		super();
 	}
-
-	public Avaliacao(Integer id, Grau grau, Usuario usuario, Comentario comentario) {
+	
+	public Comentario(Integer id, String comentario, Avaliacao avaliacao) {
 		super();
 		this.id = id;
-		this.grau = grau != null ? grau.getCodigo() : null;
-		this.usuario = usuario;
 		this.comentario = comentario;
+		this.avaliacao = avaliacao;
 	}
 	
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Grau getGrau() {
-		return Grau.toEnum(grau);
-	}
-	public void setGrau(Grau grau) {
-		this.grau = grau.getCodigo();
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	public Comentario getComentario() {
+
+	public String getComentario() {
 		return comentario;
 	}
-	public void setComentario(Comentario comentario) {
+
+	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	
+
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,7 +85,7 @@ public class Avaliacao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Avaliacao other = (Avaliacao) obj;
+		Comentario other = (Comentario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
