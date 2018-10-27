@@ -1,17 +1,13 @@
 package br.com.receita.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,38 +17,41 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @Date 26 de out de 2018
  * @Project receita
  * @Package br.com.receita.domain
- * @Desc 
+ * @Desc Essa entidade representa as entidades dos comentarios.
  */
 @Entity
-public class Comentario implements Serializable {
+public class Resposta implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seqComentario")
-	@SequenceGenerator(name = "seqComentario", sequenceName = "seq_id_comentario")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "seqResposta")
+	@SequenceGenerator(name = "seqResposta", sequenceName = "seq_id_resposta")
 	private Integer id;
-	private String comentario;
+	private String resposta;
 	
-	@OneToOne
-	@JoinColumn(name="avaliacao_id")
+	@ManyToOne
 	@JsonIgnore
-	private Avaliacao avaliacao;
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
-	@OneToMany(mappedBy="comentario", cascade=CascadeType.ALL)
-	private List<Resposta> resposta = new ArrayList<>(); 
-	
-	public Comentario() {
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name="comentario_id")
+	private Comentario comentario;
+
+	public Resposta() {
 		super();
 	}
-	
-	public Comentario(Integer id, String comentario, Avaliacao avaliacao) {
+
+	public Resposta(Integer id, String resposta, Usuario usuario, Comentario comentario) {
 		super();
 		this.id = id;
+		this.resposta = resposta;
+		this.usuario = usuario;
 		this.comentario = comentario;
-		this.avaliacao = avaliacao;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -61,28 +60,28 @@ public class Comentario implements Serializable {
 		this.id = id;
 	}
 
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-
-	public Avaliacao getAvaliacao() {
-		return avaliacao;
-	}
-
-	public void setAvaliacao(Avaliacao avaliacao) {
-		this.avaliacao = avaliacao;
-	}
-
-	public List<Resposta> getResposta() {
+	public String getResposta() {
 		return resposta;
 	}
 
-	public void setResposta(List<Resposta> resposta) {
+	public void setResposta(String resposta) {
 		this.resposta = resposta;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Comentario getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(Comentario comentario) {
+		this.comentario = comentario;
 	}
 
 	@Override
@@ -92,6 +91,7 @@ public class Comentario implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,7 +100,7 @@ public class Comentario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Comentario other = (Comentario) obj;
+		Resposta other = (Resposta) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
