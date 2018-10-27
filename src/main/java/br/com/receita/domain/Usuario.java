@@ -31,6 +31,12 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy = "usuario", cascade=CascadeType.ALL)
 	private List<Receita> receita = new ArrayList<>();
 	
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
+	private List<Avaliacao> avaliacao = new ArrayList<>();
+	
+	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
+	private List<Resposta> resposta = new ArrayList<>(); 
+	
 	public Usuario() {
 		super();
 	}
@@ -89,6 +95,22 @@ public class Usuario implements Serializable{
 
 	public void setReceita(List<Receita> receita) {
 		this.receita = receita;
+	}
+	
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
+	public List<Resposta> getResposta() {
+		return resposta;
+	}
+
+	public void setResposta(List<Resposta> resposta) {
+		this.resposta = resposta;
 	}
 
 	@Override
