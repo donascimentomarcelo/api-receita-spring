@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.receita.domain.Avaliacao;
 import br.com.receita.domain.Comentario;
 import br.com.receita.service.ComentarioService;
 
@@ -34,6 +34,7 @@ public class ComentariosResource {
 		return ResponseEntity.ok(list);
 	}
 	
+	@PostMapping
 	ResponseEntity<Comentario> criar(@RequestBody Comentario comentario, @PathVariable Integer avaliacao_id) {
 		Comentario retorno = comentarioService.salvar(comentario, avaliacao_id);
 		return ResponseEntity.ok(retorno);

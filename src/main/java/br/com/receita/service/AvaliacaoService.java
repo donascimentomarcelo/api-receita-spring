@@ -35,4 +35,14 @@ public interface AvaliacaoService {
 	 */
 	Avaliacao salvar(Avaliacao avaliacao) throws Exception;
 
+	/**
+	 * @param id
+	 * @Author Marcelo Nascimento
+	 * @Date 28 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Deleta uma avaliacao e consequentemente comentario, caso exista.
+	 */
+	void deletar(Integer id);
+
 }

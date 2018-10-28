@@ -49,5 +49,16 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 		avaliacao.setUsuario(usuarioService.pesquisaUsuarioLogado());
 		return avaliacaoRepository.save(avaliacao);
 	}
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.AvaliacaoService#deletar(java.lang.Integer)
+	 * @param id
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 16:23:04
+	 */
+	@Override
+	public void deletar(Integer id) {
+		avaliacaoRepository.delete(id);
+	}
 
 }
