@@ -50,5 +50,19 @@ public class ComentarioServiceImpl implements ComentarioService {
 		comentario.setAvaliacao(avaliacao);
 		return comentarioRepository.save(comentario);
 	}
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.ComentarioService#atualizar(br.com.receita.domain.Comentario, java.lang.Integer)
+	 * @param comentario
+	 * @param id
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 11:37:24
+	 */
+	@Override
+	public void atualizar(Comentario comentario, Integer id) {
+		Comentario coment = comentarioRepository.findOne(id);
+		coment.setComentario(comentario.getComentario());
+		comentarioRepository.save(coment);
+	}
 
 }

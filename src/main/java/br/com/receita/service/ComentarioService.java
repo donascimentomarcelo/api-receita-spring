@@ -35,4 +35,15 @@ public interface ComentarioService {
 	 */
 	Comentario salvar(Comentario comentario, Integer avaliacao_id);
 
+	/**
+	 * @param comentario
+	 * @param id
+	 * @Author Marcelo Nascimento
+	 * @Date 28 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Deve atualizar um comentario vinculado a uma avaliacao.
+	 */
+	void atualizar(Comentario comentario, Integer id);
+
 }
