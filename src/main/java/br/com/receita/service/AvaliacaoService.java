@@ -19,8 +19,20 @@ public interface AvaliacaoService {
 	 * @Date 27 de out de 2018
 	 * @Project receita
 	 * @Package br.com.receita.service
-	 * @Desc 
+	 * @Desc Lista todas as avaliaceos.
 	 */
 	List<Avaliacao> listarTodos();
+
+	/**
+	 * @param avaliacao
+	 * @return
+	 * @throws Exception 
+	 * @Author Marcelo Nascimento
+	 * @Date 27 de out de 2018
+	 * @Project receita
+	 * @Package br.com.receita.service
+	 * @Desc Cria uma avaliacao.
+	 */
+	Avaliacao salvar(Avaliacao avaliacao) throws Exception;
 
 }
