@@ -3,6 +3,7 @@ package br.com.receita.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.receita.domain.Avaliacao;
 import br.com.receita.domain.Comentario;
@@ -17,6 +18,7 @@ import br.com.receita.service.ComentarioService;
  * @Package br.com.receita.service.impl
  * @Desc Implementacao do servico de comentarios.
  */
+@Service
 public class ComentarioServiceImpl implements ComentarioService {
 
 	@Autowired

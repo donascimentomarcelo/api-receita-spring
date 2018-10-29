@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +23,7 @@ import br.com.receita.service.AvaliacaoService;
  * @Desc Controlador que lista as avaliações referentes a uma receita.
  */
 @RestController
-@RequestMapping("Avaliacoes")
+@RequestMapping("/api/v1/avaliacoes")
 public class AvaliacaoResource {
 
 	@Autowired
@@ -36,9 +35,9 @@ public class AvaliacaoResource {
 		return ResponseEntity.ok(list);
 	}
 	
-	@PostMapping
-	ResponseEntity<Avaliacao> criar(@RequestBody Avaliacao avaliacao) throws Exception {
-		Avaliacao retorno =  avaliacaoService.salvar(avaliacao);
+	@PostMapping("/{receita_id}")
+	ResponseEntity<Avaliacao> criar(@RequestBody Avaliacao avaliacao, @PathVariable Integer receita_id) throws Exception {
+		Avaliacao retorno =  avaliacaoService.salvar(avaliacao, receita_id);
 		return ResponseEntity.ok(retorno);
 	}
 	

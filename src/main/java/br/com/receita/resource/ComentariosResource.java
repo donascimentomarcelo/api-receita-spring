@@ -23,7 +23,7 @@ import br.com.receita.service.ComentarioService;
  * @Desc 
  */
 @RestController
-@RequestMapping("/comentarios")
+@RequestMapping("/api/v1/comentarios")
 public class ComentariosResource {
 	@Autowired
 	private ComentarioService comentarioService;
@@ -34,13 +34,13 @@ public class ComentariosResource {
 		return ResponseEntity.ok(list);
 	}
 	
-	@PostMapping
+	@PostMapping("/{avaliacao_id}")
 	ResponseEntity<Comentario> criar(@RequestBody Comentario comentario, @PathVariable Integer avaliacao_id) {
 		Comentario retorno = comentarioService.salvar(comentario, avaliacao_id);
 		return ResponseEntity.ok(retorno);
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	ResponseEntity<?> atualizar(@RequestBody Comentario comentario, @PathVariable Integer id) {
 		comentarioService.atualizar(comentario, id);
 		return ResponseEntity.noContent().build();

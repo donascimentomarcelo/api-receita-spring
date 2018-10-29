@@ -42,6 +42,11 @@ public class Avaliacao implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="avaliacao")
 	private Comentario comentario;
 	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name="receita_id")
+	private Receita receita;
+	
 	public Avaliacao() {
 		super();
 	}
@@ -78,7 +83,13 @@ public class Avaliacao implements Serializable {
 	public void setComentario(Comentario comentario) {
 		this.comentario = comentario;
 	}
-	
+	public Receita getReceita() {
+		return receita;
+	}
+	public void setReceita(Receita receita) {
+		this.receita = receita;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
