@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.receita.domain.Avaliacao;
+import br.com.receita.domain.Receita;
 import br.com.receita.repository.AvaliacaoRepository;
+import br.com.receita.repository.ReceitaRepository;
 import br.com.receita.service.AvaliacaoService;
 import br.com.receita.service.UsuarioService;
 
@@ -22,6 +24,9 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 	
 	@Autowired
 	private AvaliacaoRepository avaliacaoRepository;
+	
+	@Autowired
+	private ReceitaRepository receitaRepository;
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -45,9 +50,22 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 	 * @Date 23:45:10
 	 */
 	@Override
-	public Avaliacao salvar(Avaliacao avaliacao) throws Exception {
+	public Avaliacao salvar(Avaliacao avaliacao, Integer receita_id) throws Exception {
+		Receita receita = receitaRepository.findOne(receita_id);
+		avaliacao.setReceita(receita);
 		avaliacao.setUsuario(usuarioService.pesquisaUsuarioLogado());
 		return avaliacaoRepository.save(avaliacao);
+	}
+	/* (non-Javadoc)
+	 * @see br.com.receita.service.AvaliacaoService#deletar(java.lang.Integer)
+	 * @param id
+	 * @Project receita
+	 * @Author Marcelo Nascimento
+	 * @Date 16:23:04
+	 */
+	@Override
+	public void deletar(Integer id) {
+		avaliacaoRepository.delete(id);
 	}
 
 }

@@ -1,9 +1,12 @@
 package br.com.receita.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +37,9 @@ public class Receita implements Serializable{
 	
 	@OneToMany(mappedBy = "id.receita")
 	private Set<ItemReceita> itens = new HashSet<>();
+	
+	@OneToMany(mappedBy="receita", cascade=CascadeType.ALL)
+	private List<Avaliacao> avaliacao = new ArrayList<>();
 	
 	public Receita() {
 		super();
@@ -79,6 +85,14 @@ public class Receita implements Serializable{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public List<Avaliacao> getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(List<Avaliacao> avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	@Override

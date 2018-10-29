@@ -4,47 +4,45 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.receita.domain.Avaliacao;
-import br.com.receita.service.AvaliacaoService;
+import br.com.receita.domain.Comentario;
+import br.com.receita.service.ComentarioService;
 
 /**
  * @Author Marcelo Nascimento
- * @Date 27 de out de 2018
+ * @Date 28 de out de 2018
  * @Project receita
  * @Package br.com.receita.resource
- * @Desc Controlador que lista as avaliações referentes a uma receita.
+ * @Desc 
  */
 @RestController
-@RequestMapping("/api/v1/avaliacoes")
-public class AvaliacaoResource {
-
+@RequestMapping("/api/v1/comentarios")
+public class ComentariosResource {
 	@Autowired
-	private AvaliacaoService avaliacaoService;
+	private ComentarioService comentarioService;
 	
 	@GetMapping
-	ResponseEntity<List<Avaliacao>> listar() {
-		List<Avaliacao> list =  avaliacaoService.listarTodos();
+	ResponseEntity<List<Comentario>> listar() {
+		List<Comentario> list = comentarioService.listarTodos();
 		return ResponseEntity.ok(list);
 	}
 	
-	@PostMapping("/{receita_id}")
-	ResponseEntity<Avaliacao> criar(@RequestBody Avaliacao avaliacao, @PathVariable Integer receita_id) throws Exception {
-		Avaliacao retorno =  avaliacaoService.salvar(avaliacao, receita_id);
+	@PostMapping("/{avaliacao_id}")
+	ResponseEntity<Comentario> criar(@RequestBody Comentario comentario, @PathVariable Integer avaliacao_id) {
+		Comentario retorno = comentarioService.salvar(comentario, avaliacao_id);
 		return ResponseEntity.ok(retorno);
 	}
 	
-	@DeleteMapping
-	ResponseEntity<?> deletar(@PathVariable Integer id) {
-		avaliacaoService.deletar(id);
+	@PutMapping("/{id}")
+	ResponseEntity<?> atualizar(@RequestBody Comentario comentario, @PathVariable Integer id) {
+		comentarioService.atualizar(comentario, id);
 		return ResponseEntity.noContent().build();
 	}
-
 }
