@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import br.com.receita.domain.Avaliacao;
+import br.com.receita.domain.Comentario;
 import br.com.receita.domain.Endereco;
 import br.com.receita.domain.Engrediente;
 import br.com.receita.domain.Grupo;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
 import br.com.receita.domain.Usuario;
+import br.com.receita.domain.enums.Grau;
 import br.com.receita.domain.enums.Medida;
+import br.com.receita.repository.AvaliacaoRepository;
+import br.com.receita.repository.ComentarioRepository;
 import br.com.receita.repository.EnderecoRepository;
 import br.com.receita.repository.EngredienteRepository;
 import br.com.receita.repository.GrupoRepository;
@@ -41,12 +46,24 @@ public class Instanciacao implements CommandLineRunner{
 	@Autowired
 	private GrupoRepository grupoRepository;
 	
+	@Autowired
+	private AvaliacaoRepository avaliacaoRepository;
+	
+	@Autowired
+	private ComentarioRepository comentarioRepository;
+	
 	@Override
 	public void run(String... arg0) throws Exception {
 		
 		Usuario usuario = new Usuario(null, "Crane", "crane@gmail.com", "123");
+		Usuario usuario1 = new Usuario(null, "Junior", "junior@gmail.com", "123");
+		Usuario usuario2 = new Usuario(null, "Sonia", "sonia@gmail.com", "123");
+		Usuario usuario3 = new Usuario(null, "Claudia", "claudia@gmail.com", "123");
+		Usuario usuario4 = new Usuario(null, "Manuel", "sombra@gmail.com", "123");
 		
-		usuarioRepository.save(usuario);
+		usuarioRepository.save(Arrays.asList(
+				usuario, usuario1, usuario2, usuario3, usuario4
+		));
 		
 		Endereco endereco =  new Endereco(null, "Braz de pina", "21012409", "Rua Trinta e Seis - Braz de Pina", "Quadra C9", null, "RJ");
 		
@@ -104,6 +121,17 @@ public class Instanciacao implements CommandLineRunner{
 						ir1, ir2, ir3, ir4, ir5, ir6, ir7, ir8, ir9, ir10, ir11, ir12, ir13, ir14, ir15
 						)
 				);
+		
+		Avaliacao avaliacao = new Avaliacao(null, Grau.EXCELENTE, usuario4, receita1);
+		Avaliacao avaliacao1 = new Avaliacao(null, Grau.PESSIMO, usuario3, receita1);
+		
+		avaliacaoRepository.save(Arrays.asList(avaliacao, avaliacao1));
+		
+		
+		Comentario comentario = new Comentario(null, "Muito bom", avaliacao);
+		Comentario comentario1 = new Comentario(null, "Receita bosta", avaliacao1);
+		
+		comentarioRepository.save(Arrays.asList(comentario, comentario1));
 	}
 
 	

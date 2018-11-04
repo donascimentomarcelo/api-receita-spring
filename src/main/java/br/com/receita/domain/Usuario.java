@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable{
 
@@ -32,6 +34,7 @@ public class Usuario implements Serializable{
 	private List<Receita> receita = new ArrayList<>();
 	
 	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Avaliacao> avaliacao = new ArrayList<>();
 	
 	@OneToMany(mappedBy="usuario", cascade=CascadeType.ALL)

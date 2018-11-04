@@ -35,7 +35,6 @@ public class Avaliacao implements Serializable {
 	private Integer grau;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
@@ -51,12 +50,12 @@ public class Avaliacao implements Serializable {
 		super();
 	}
 
-	public Avaliacao(Integer id, Grau grau, Usuario usuario, Comentario comentario) {
+	public Avaliacao(Integer id, Grau grau, Usuario usuario, Receita receita) {
 		super();
 		this.id = id;
 		this.grau = grau != null ? grau.getCodigo() : null;
 		this.usuario = usuario;
-		this.comentario = comentario;
+		this.receita = receita;
 	}
 	
 	public Integer getId() {
