@@ -12,18 +12,20 @@ public class MensagemDTO {
 	private Integer comentario_id;
 	private Integer usuario_id;
 	private Integer receita_id;
+	private String nome;
 	private String resposta;
 	
 	public MensagemDTO() {
 		super();
 	}
 
-	public MensagemDTO(Integer comentario_id, Integer usuario_id, Integer receita_id, String resposta) {
+	public MensagemDTO(Integer comentario_id, Integer usuario_id, Integer receita_id, String nome, String resposta) {
 		super();
 		this.comentario_id = comentario_id;
 		this.usuario_id = usuario_id;
 		this.receita_id = receita_id;
 		this.resposta = resposta;
+		this.nome = nome;
 	}
 
 	public Integer getComentario_id() {
@@ -57,4 +59,13 @@ public class MensagemDTO {
 	public void setResposta(String resposta) {
 		this.resposta = resposta;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }

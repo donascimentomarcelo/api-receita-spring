@@ -6,6 +6,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import br.com.receita.dto.MensagemDTO;
+import br.com.receita.service.RespostaService;
 
 /**
  * @Author Marcelo Nascimento
@@ -20,13 +21,17 @@ public class RespostasResource {
 	private final SimpMessagingTemplate template;
 	
 	@Autowired
+	private RespostaService respostaService;
+	
+	@Autowired
 	RespostasResource(SimpMessagingTemplate template){
 		this.template = template;
 	}
 	
 	@MessageMapping("/send/message")
-	public void onReciveMessage(MensagemDTO message) {
-		System.out.println(message.getResposta());
-		this.template.convertAndSend("/chat", message);
+	public void onReciveMessage(MensagemDTO mensagem) throws Exception {
+//		MensagemDTO novaMensagem = respostaService.salvar(mensagem);
+		System.out.println(mensagem.getResposta());
+		this.template.convertAndSend("/chat", mensagem);
 	}
 }
