@@ -13,6 +13,7 @@ import br.com.receita.domain.Engrediente;
 import br.com.receita.domain.Grupo;
 import br.com.receita.domain.ItemReceita;
 import br.com.receita.domain.Receita;
+import br.com.receita.domain.Resposta;
 import br.com.receita.domain.Usuario;
 import br.com.receita.domain.enums.Grau;
 import br.com.receita.domain.enums.Medida;
@@ -23,7 +24,9 @@ import br.com.receita.repository.EngredienteRepository;
 import br.com.receita.repository.GrupoRepository;
 import br.com.receita.repository.ItemReceitaRepository;
 import br.com.receita.repository.ReceitaRepository;
+import br.com.receita.repository.RespostasRepository;
 import br.com.receita.repository.UsuarioRepository;
+import br.com.receita.service.RespostaService;
 
 @Configuration
 public class Instanciacao implements CommandLineRunner{
@@ -51,6 +54,9 @@ public class Instanciacao implements CommandLineRunner{
 	
 	@Autowired
 	private ComentarioRepository comentarioRepository;
+	
+	@Autowired
+	private RespostasRepository respostasRepository;
 	
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -132,6 +138,10 @@ public class Instanciacao implements CommandLineRunner{
 		Comentario comentario1 = new Comentario(null, "Receita bosta", avaliacao1);
 		
 		comentarioRepository.save(Arrays.asList(comentario, comentario1));
+		
+		
+		Resposta resposta = new Resposta(null, "uahushasuuh", usuario4, comentario1);
+		respostasRepository.save(resposta);
 	}
 
 	
